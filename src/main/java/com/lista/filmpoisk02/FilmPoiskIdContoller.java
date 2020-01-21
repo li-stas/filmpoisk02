@@ -26,7 +26,7 @@ public class FilmPoiskIdContoller implements Queryinterface {
     @RequestMapping("/filmpoisk-id")
     public Querying Querying(@RequestParam(value = "id", required = false, defaultValue = "tt3340364") String cSeekId) {
         //http://localhost:8080/filmpoisk?id=tt3340364
-        log.info("--> "+"/filmpoisk-id");
+        log.info("--> " + "/filmpoisk-id");
         log.info("config.getApikey()=" + config.getApikey());
          
 

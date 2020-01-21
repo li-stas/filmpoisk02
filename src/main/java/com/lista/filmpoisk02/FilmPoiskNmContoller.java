@@ -27,7 +27,7 @@ public class FilmPoiskNmContoller implements Queryinterface {
     public Querying Querying(@RequestParam(value = "name", required = false, defaultValue = "batman") String cName) {
         //http://localhost:8080/filmpoisk?name=Stas
         log.info("config.getApikey()=" + config.getApikey());
-        log.info("--> "+"/filmpoisk-nm " + cName);
+        log.info("--> " + "/filmpoisk-nm " + cName);
         String [] aName = cName.split(";");
 
         if (aName.length > 0) {

@@ -20,7 +20,6 @@ public class DownloadImage {
         try(InputStream in = new URL(cUrl).openStream()) {
             Files.deleteIfExists(Paths.get(cImageFile));
             Files.copy(in, Paths.get(cImageFile));
-
         } catch (IOException e) {
            log.error(e.getMessage() + "l:25");
         }

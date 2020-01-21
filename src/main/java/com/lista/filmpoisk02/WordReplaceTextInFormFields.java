@@ -53,11 +53,11 @@ public class WordReplaceTextInFormFields {
 
         replaceFormFieldText(document, "title", "Black Cat, White Cat");
         replaceFormFieldText(document, "imdbID", "a625f1bf");
-        replaceFormFieldText(document, "year", String.format("%d",1998));
+        replaceFormFieldText(document, "year", String.format("%d", 1998));
         replaceFormFieldText(document, "production", "October Films");
         replaceFormFieldText(document, "poster", "https://m.media-amazon.com/images/M/MV5BMmExZTZhN2QtMzg5Mi00Y2M5LTlmMWYtNTUzMzUwMGM2OGQ3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg");
 
-        FileOutputStream out = new FileOutputStream("Black Cat, White Cat ("+"a625f1bf"+").docx");
+        FileOutputStream out = new FileOutputStream("Black Cat, White Cat (" + "a625f1bf" + ").docx");
         document.write(out);
         out.close();
         //document.close();

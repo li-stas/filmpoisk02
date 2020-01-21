@@ -1,7 +1,5 @@
 package com.lista.filmpoisk02;
 
-import java.util.Arrays;
-
 public class Page {
     private String imdbID;
     private String title;

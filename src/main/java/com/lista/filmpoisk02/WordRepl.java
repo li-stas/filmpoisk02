@@ -21,11 +21,11 @@ public class WordRepl {
             WordReplaceTextInFormFields wrtiff =  new WordReplaceTextInFormFields();
             XWPFDocument document = new XWPFDocument(new FileInputStream(cPathAndFileDotx));
 
-            wrtiff.replaceFormFieldText(document, "title", oPage.getTitle());
-            wrtiff.replaceFormFieldText(document, "imdbID", oPage.getImdbID());
-            wrtiff.replaceFormFieldText(document, "year", String.format("%d",oPage.getYear()));
-            wrtiff.replaceFormFieldText(document, "production", oPage.getProduction());
-            wrtiff.replaceFormFieldText(document, "poster", oPage.getPoster());
+            WordReplaceTextInFormFields.replaceFormFieldText(document, "title", oPage.getTitle());
+            WordReplaceTextInFormFields.replaceFormFieldText(document, "imdbID", oPage.getImdbID());
+            WordReplaceTextInFormFields.replaceFormFieldText(document, "year", String.format("%d",oPage.getYear()));
+            WordReplaceTextInFormFields.replaceFormFieldText(document, "production", oPage.getProduction());
+            WordReplaceTextInFormFields.replaceFormFieldText(document, "poster", oPage.getPoster());
 
 
             if (oPage.getPosterImg() != null) {
