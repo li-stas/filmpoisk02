@@ -1,8 +1,8 @@
 package com.lista.filmpoisk02;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
@@ -32,9 +32,17 @@ public class FilmPoiskNmContoller implements Queryinterface {
 
         if (aName.length > 0) {
             List<String> aNameList = Arrays.asList(aName);
-            aNameList.forEach(topic -> log.info(topic));
+            int nLen_aUrl;
+            Future<Page>[] thr;
 
-            log.info("Ставим ключи поиска в потоки");
+            nLen_aUrl = aNameList.size();
+            thr = new Future[nLen_aUrl];
+
+            log.info("// постановка всех задач в поток");
+            for (int i = 0; i < nLen_aUrl; i++) {
+                log.info(aNameList.get(i));
+                //thr[i] = gitHubLookupService.findPage(aUrl.get(i));
+            }
 
         } else {
             cName = "Строка поиска с ошибкой =" + cName;
