@@ -1,10 +1,14 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.controller;
 
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.lista.filmpoisk02.model.OmDbApiLookupService;
+import com.lista.filmpoisk02.model.Querying;
+import com.lista.filmpoisk02.model.Page;
+import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAsync
 public class FilmPoiskNmContoller implements Queryinterface {
     private static final Logger log = LoggerFactory.getLogger(FilmPoiskNmContoller.class);
+    private static final String SUCCESS_STATUS = "success";
+    private static final String ERROR_STATUS = "error";
+    private static final int CODE_SUCCESS = 100;
+    private static final int AUTH_FAILURE = 102;
+
     private static final String template = "FilmPoiskNm, %s!";
     private final AtomicLong counter = new AtomicLong();
 
@@ -71,8 +80,10 @@ public class FilmPoiskNmContoller implements Queryinterface {
                     }
                 }
             }
+
             log.info("  // Print results, including elapsed time");
             log.info("  Elapsed time: " + (System.currentTimeMillis() - start));
+
             for (int i = 0; i < nLen_aUrl; i++) {
                 try {
 

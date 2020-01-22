@@ -1,5 +1,6 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model.converters;
 
+import com.lista.filmpoisk02.model.Page;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;

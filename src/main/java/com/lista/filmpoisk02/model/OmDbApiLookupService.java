@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model;
 
 
 import org.slf4j.Logger;
@@ -18,6 +18,11 @@ import java.util.concurrent.Future;
 public class OmDbApiLookupService   { //implements SiteLookupService
     private static final Logger logger = LoggerFactory.getLogger(OmDbApiLookupService.class);
 
+    private static final String SUCCESS_STATUS = "success";
+    private static final String ERROR_STATUS = "error";
+    private static final int CODE_SUCCESS = 100;
+    private static final int AUTH_FAILURE = 102;
+
     //private RestTemplate restTemplate = new RestTemplate();
     private RestTemplate restTemplate;
 
@@ -29,12 +34,18 @@ public class OmDbApiLookupService   { //implements SiteLookupService
     public Future<Page> findPage(String cUrlKey)  {
 
         //System.out.println("Looking up " + user);
-        logger.info("Looking up " + cUrlKey);
+        logger.info("  Looking up " + cUrlKey);
 
         String url = String.format("http://www.omdbapi.com/%s", cUrlKey);
         String cPage = restTemplate.getForObject( url, String.class);
-
-        Page oPage01 = new Json2oPage().eval(cPage);
+        logger.info("  cPage " + cPage);
+        Page oPage01;
+        if (cPage.contains("Error\":")) {
+            oPage01 = new Page(cPage, AUTH_FAILURE);
+        } else {
+            oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
+            oPage01 = new Json2oPage().eval(cPage, oPage01);
+        }
 
         //Thread.sleep(1000L);
         return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса

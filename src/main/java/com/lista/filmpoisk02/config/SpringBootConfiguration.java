@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.config;
 
 import org.springframework.boot.context.properties.*;
 import org.springframework.stereotype.*;

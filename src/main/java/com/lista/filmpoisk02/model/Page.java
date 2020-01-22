@@ -1,4 +1,6 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model;
+
+import com.lista.filmpoisk02.model.DownloadImage;
 
 public class Page {
     private String imdbID;
@@ -8,8 +10,17 @@ public class Page {
     private String poster;
     private String posterImg;
 
+    private String status;
+    private int code;
+
     public Page() {
     }
+
+    public Page(String status, int code) {
+        this.status = status;
+        this.code = code;
+    }
+
 
     public String getImdbID() {
         return imdbID;
@@ -69,6 +80,26 @@ public class Page {
         this.posterImg = posterImg;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void json2oPage(String cJson) {
+
+    }
+
     @Override
     public String toString() {
         return "Page{" +
@@ -78,6 +109,8 @@ public class Page {
                 ", production='" + production + '\'' +
                 ", poster='" + poster + '\'' +
                 ", posterImg='" + posterImg + '\'' +
+                ", status='" + status + '\'' +
+                ", code=" + code +
                 '}';
     }
 }

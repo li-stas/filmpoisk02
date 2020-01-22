@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model.converters;
 
 import java.io.FileOutputStream;
 import java.io.FileInputStream;

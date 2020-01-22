@@ -1,5 +1,6 @@
 package com.lista.filmpoisk02;
 
+import com.lista.filmpoisk02.model.Page;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 

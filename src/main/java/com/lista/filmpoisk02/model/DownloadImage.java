@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +16,10 @@ public class DownloadImage {
 /*
         try(InputStream in = new URL("http://example.com/image.jpg").openStream()){
             Files.copy(in, Paths.get("C:/File/To/Save/To/image.jpg"));
+            log.info("Files.exists(Paths.get(cImageFile)) " +  Files.exists(Paths.get(cImageFile)) + " " + Paths.get(cImageFile) +" " +cImageFile);
 */
-        if (Files.exists(Paths.get(cImageFile))) {
+
+        if (!(Files.exists(Paths.get(cImageFile)))) {
             try(InputStream in = new URL(cUrl).openStream()) {
                 Files.deleteIfExists(Paths.get(cImageFile));
                 Files.copy(in, Paths.get(cImageFile));

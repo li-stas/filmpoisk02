@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class Json2oPage {
     private static final Logger log = LoggerFactory.getLogger(Json2oPage.class);
-    public Page eval(String cPage) {
-        Page oPage01 = new Page();
+    public Page eval(String cPage, Page oPage01) {
+        //Page oPage01 = new Page();
 
         ObjectMapper mapper = new ObjectMapper();
         try {

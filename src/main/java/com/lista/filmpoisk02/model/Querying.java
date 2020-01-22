@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02;
+package com.lista.filmpoisk02.model;
 
 /**
  * Поле id - это уникальный идентификатор приветствия, а content - текстовое представление.
