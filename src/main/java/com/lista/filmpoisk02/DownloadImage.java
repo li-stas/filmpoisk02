@@ -12,16 +12,19 @@ import java.nio.file.Paths;
 
 public class DownloadImage {
     private static final Logger log = LoggerFactory.getLogger(DownloadImage.class);
-    public void eval(String cUrl, String cImageFile)  {
+    public synchronized void  eval(String cUrl, String cImageFile)  {
 /*
         try(InputStream in = new URL("http://example.com/image.jpg").openStream()){
             Files.copy(in, Paths.get("C:/File/To/Save/To/image.jpg"));
 */
-        try(InputStream in = new URL(cUrl).openStream()) {
-            Files.deleteIfExists(Paths.get(cImageFile));
-            Files.copy(in, Paths.get(cImageFile));
-        } catch (IOException e) {
-           log.error(e.getMessage() + "l:25");
+        if (Files.exists(Paths.get(cImageFile))) {
+            try(InputStream in = new URL(cUrl).openStream()) {
+                Files.deleteIfExists(Paths.get(cImageFile));
+                Files.copy(in, Paths.get(cImageFile));
+            } catch (IOException e) {
+               log.error(e.getMessage() + " l:25");
+                //e.printStackTrace();
+            }
         }
     }
 }
