@@ -1,7 +1,5 @@
 package com.lista.filmpoisk02.model;
 
-import com.lista.filmpoisk02.model.DownloadImage;
-
 public class Page {
     private String imdbID;
     private String title;
