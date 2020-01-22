@@ -1,7 +1,8 @@
-package com.lista.filmpoisk02.model;
+package com.lista.filmpoisk02.model.lib;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +11,6 @@ import java.util.Map;
 public class Json2oPage {
     private static final Logger log = LoggerFactory.getLogger(Json2oPage.class);
     public Page eval(String cPage, Page oPage01) {
-        //Page oPage01 = new Page();
-
         ObjectMapper mapper = new ObjectMapper();
         try {
             Map<String, Object> mapPage = mapper.readValue(cPage, new TypeReference<Map<String, Object>>() {

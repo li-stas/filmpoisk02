@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.model;
+package com.lista.filmpoisk02.model.lib;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

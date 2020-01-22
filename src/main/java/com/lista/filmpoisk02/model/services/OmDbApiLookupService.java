@@ -1,7 +1,7 @@
 package com.lista.filmpoisk02.model.services;
 
 
-import com.lista.filmpoisk02.model.Json2oPage;
+import com.lista.filmpoisk02.model.lib.Json2oPage;
 import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
