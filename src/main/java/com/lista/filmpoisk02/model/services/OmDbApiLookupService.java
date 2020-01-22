@@ -1,6 +1,8 @@
-package com.lista.filmpoisk02.model;
+package com.lista.filmpoisk02.model.services;
 
 
+import com.lista.filmpoisk02.model.Json2oPage;
+import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -15,7 +17,7 @@ import java.util.concurrent.Future;
  * 2. сервис запросов к GitHub для поиска страниц.
  */
 @Service //делая его кандидатом для сканирования компонентов в Spring для обнаружения и помещения его в
-public class OmDbApiLookupService   { //implements SiteLookupService
+public class OmDbApiLookupService  { //implements SiteLookupService
     private static final Logger logger = LoggerFactory.getLogger(OmDbApiLookupService.class);
 
     private static final String SUCCESS_STATUS = "success";
@@ -38,7 +40,8 @@ public class OmDbApiLookupService   { //implements SiteLookupService
 
         String url = String.format("http://www.omdbapi.com/%s", cUrlKey);
         String cPage = restTemplate.getForObject( url, String.class);
-        logger.info("  cPage " + cPage);
+
+        //logger.info("  cPage " + cPage);
         Page oPage01;
         if (cPage.contains("Error\":")) {
             oPage01 = new Page(cPage, AUTH_FAILURE);
@@ -46,7 +49,6 @@ public class OmDbApiLookupService   { //implements SiteLookupService
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
             oPage01 = new Json2oPage().eval(cPage, oPage01);
         }
-
         //Thread.sleep(1000L);
         return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса
     }

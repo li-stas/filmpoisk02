@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.lista.filmpoisk02.model.OmDbApiLookupService;
+import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
 import com.lista.filmpoisk02.model.Querying;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.config.SpringBootConfiguration;

@@ -5,7 +5,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.lista.filmpoisk02.model.Json2oPage;
-import com.lista.filmpoisk02.model.OmDbApiLookupService;
+import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
 import com.lista.filmpoisk02.model.Querying;
 
 import com.lista.filmpoisk02.model.Page;
