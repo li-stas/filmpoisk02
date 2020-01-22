@@ -24,7 +24,7 @@ import java.io.FileOutputStream;
  */
 public class WordWorker {
     private static final Logger log = LoggerFactory.getLogger(WordWorker.class);
-    public void Create(Page oPage, String cPathAndFileDocx) {
+    public String Create(Page oPage, String cPathAndFileDocx) {
         try {
             // создаем модель docx документа,
             // к которой будем прикручивать наполнение (колонтитулы, текст)
@@ -102,7 +102,7 @@ public class WordWorker {
             //e.printStackTrace();
             log.error(e.getMessage());
         }
-
+        return cPathAndFileDocx;
     }
 
     private static CTP createFooterModel(String footerContent) {

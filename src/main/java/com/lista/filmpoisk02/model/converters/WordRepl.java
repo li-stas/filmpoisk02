@@ -16,7 +16,8 @@ import java.io.IOException;
 
 public class WordRepl {
     private static final Logger log = LoggerFactory.getLogger(WordRepl.class);
-    public void Eval(Page oPage, String cPathAndFileDotx) {
+    public String Eval(Page oPage, String cPathAndFileDotx) {
+        String cFile = cPathAndFileDotx;
 
         try {
             WordReplaceTextInFormFields wrtiff =  new WordReplaceTextInFormFields();
@@ -41,7 +42,7 @@ public class WordRepl {
                 run.addPicture(is, XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU(200), Units.toEMU(200)); // 200x200 pixels
             }
 
-            String cFile = oPage.getTitle()  + "(" + oPage.getImdbID() + ")" + ".docx";
+            cFile = oPage.getTitle()  + "(" + oPage.getImdbID() + ")" + ".docx";
             FileOutputStream out = new FileOutputStream(cFile);
             document.write(out);
             out.close();
@@ -52,6 +53,6 @@ public class WordRepl {
             log.error(e.getMessage());
             //e.printStackTrace();
         }
-
+        return cFile;
     }
 }
