@@ -44,7 +44,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         //logger.info("  cPage " + cPage);
         Page oPage01;
         if (cPage.contains("Error\":")) {
-            oPage01 = new Page(cPage, AUTH_FAILURE);
+            oPage01 = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);
         } else {
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
             oPage01 = new Json2oPage().eval(cPage, oPage01);

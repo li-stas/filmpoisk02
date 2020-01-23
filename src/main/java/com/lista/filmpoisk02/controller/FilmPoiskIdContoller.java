@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class FilmPoiskIdContoller implements Queryinterface {
     private static final Logger log = LoggerFactory.getLogger(FilmPoiskIdContoller.class);
 
-    private static final String template = "FilmPoiskId, %s!";
+    private static final String template = "FilmPoiskId, %s";
     private final AtomicLong counter = new AtomicLong();
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:

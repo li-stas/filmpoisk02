@@ -34,7 +34,7 @@ public class FilmPoiskNmContoller implements Queryinterface {
     private static final int CODE_SUCCESS = 100;
     private static final int AUTH_FAILURE = 102;
 
-    private static final String template = "FilmPoiskNm, %s!";
+    private static final String template = "FilmPoiskNm, %s";
     private final AtomicLong counter = new AtomicLong();
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:

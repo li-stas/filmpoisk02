@@ -1,7 +1,6 @@
 package com.lista.filmpoisk02.model.converters;
 
 import com.lista.filmpoisk02.model.Page;
-import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -14,7 +13,6 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -73,19 +71,7 @@ public class WordWorker {
             createParagraph(docxModel).setText("poster:" + oPage.getPoster());
 
             // вывод изображения
-            if (oPage.getPosterImg() != null) {
-                // https://stackoverflow.com/questions/26764889/how-to-insert-a-image-in-word-document-with-apache-poi
-                XWPFParagraph title = docxModel.createParagraph();
-                XWPFRun run = title.createRun();
-                run.setText("Fig.1 poster:");
-                run.setBold(true);
-                title.setAlignment(ParagraphAlignment.CENTER);
-                String imgFile =  oPage.getPosterImg();
-                FileInputStream is = new FileInputStream(imgFile);
-                run.addBreak();
-                run.addPicture(is, XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU(200), Units.toEMU(200)); // 200x200 pixels
-            }
-
+            new WordAddImgFile().eval(docxModel, oPage);
 
             // сохраняем модель docx документа в файл
             FileOutputStream outputStream = new FileOutputStream(cPathAndFileDocx);
