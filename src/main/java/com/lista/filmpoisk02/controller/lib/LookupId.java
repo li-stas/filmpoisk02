@@ -16,7 +16,7 @@ public class LookupId {
     private static final int CODE_SUCCESS = 100;
     private static final int AUTH_FAILURE = 102;
 
-    public Page Eval(String cSeekId, SpringBootConfiguration config,
+    public Page eval(String cSeekId, SpringBootConfiguration config,
                        OmDbApiLookupService omDbApiLookupService) {
         String cUrl01;
         Page oPage01 =  new Page(ERROR_STATUS, AUTH_FAILURE);

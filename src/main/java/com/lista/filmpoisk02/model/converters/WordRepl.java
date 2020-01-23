@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class WordRepl {
     private static final Logger log = LoggerFactory.getLogger(WordRepl.class);
-    public String Eval(Page oPage, String cPathAndFileDotx) {
+    public String eval(Page oPage, String cPathAndFileDotx) {
         String cFile = cPathAndFileDotx;
 
         try {

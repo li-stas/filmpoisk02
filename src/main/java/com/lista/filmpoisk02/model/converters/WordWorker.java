@@ -24,7 +24,7 @@ import java.io.FileOutputStream;
  */
 public class WordWorker {
     private static final Logger log = LoggerFactory.getLogger(WordWorker.class);
-    public String Create(Page oPage, String cPathAndFileDocx) {
+    public String create(Page oPage, String cPathAndFileDocx) {
         try {
             // создаем модель docx документа,
             // к которой будем прикручивать наполнение (колонтитулы, текст)
@@ -137,6 +137,4 @@ public class WordWorker {
         paragraphConfig.setColor("06357a");
         return paragraphConfig;
     }
-
-
 }

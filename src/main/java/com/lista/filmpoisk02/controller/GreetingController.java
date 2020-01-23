@@ -1,10 +1,11 @@
 package com.lista.filmpoisk02.controller;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.lista.filmpoisk02.model.Querying;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 
 @RestController
@@ -14,7 +15,7 @@ public class GreetingController implements Queryinterface {
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping("/greeting")
-    public Querying Querying(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
+    public Querying querying(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
         return new Querying(counter.incrementAndGet(),     String.format(template, name));
     }
 }

@@ -38,19 +38,19 @@ public class GetDocxContoller {
     }
 
     @RequestMapping("/getdocx")
-    public ResponseEntity<InputStreamResource> Querying(
+    public ResponseEntity<InputStreamResource> querying(
             @RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
 
         ResponseEntity<InputStreamResource> ret = null;
 
-        Page oPage01 = new LookupId().Eval(cSeekId, config, omDbApiLookupService);
+        Page oPage01 = new LookupId().eval(cSeekId, config, omDbApiLookupService);
         cSeekId = oPage01.getStatus();
         log.info("oPage01:" + oPage01);
 
         String cFile;
-        cFile = new WordWorker().Create(oPage01, "Page01.docx");
+        cFile = new WordWorker().create(oPage01, "Page01.docx");
 
-        cFile = new WordRepl().Eval(oPage01, "FilmPoisk.docx");
+        cFile = new WordRepl().eval(oPage01, "FilmPoisk.docx");
         try {
             ret = getFile1.downloadFile1(cFile);
         } catch (IOException e) {

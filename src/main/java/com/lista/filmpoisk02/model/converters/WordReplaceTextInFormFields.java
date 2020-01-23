@@ -1,13 +1,14 @@
 package com.lista.filmpoisk02.model.converters;
 
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-
-import org.apache.poi.xwpf.usermodel.*;
-
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlCursor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.xmlbeans.SimpleValue;
+import org.apache.xmlbeans.XmlCursor;
+import org.apache.xmlbeans.XmlObject;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 
 /**

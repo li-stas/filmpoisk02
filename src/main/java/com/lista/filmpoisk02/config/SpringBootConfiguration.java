@@ -1,7 +1,7 @@
 package com.lista.filmpoisk02.config;
 
-import org.springframework.boot.context.properties.*;
-import org.springframework.stereotype.*;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * https://www.theserverside.com/video/How-applicationproperties-simplifies-Spring-config

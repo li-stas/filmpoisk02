@@ -24,4 +24,5 @@ public class Querying {
     public String getContent() {
         return content;
     }
+
 }

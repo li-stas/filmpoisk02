@@ -5,13 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class DownloadImage {
     private static final Logger log = LoggerFactory.getLogger(DownloadImage.class);
+
     public synchronized void  eval(String cUrl, String cImageFile)  {
 /*
         try(InputStream in = new URL("http://example.com/image.jpg").openStream()){

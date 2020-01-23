@@ -1,15 +1,10 @@
 package com.lista.filmpoisk02.controller;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.lista.filmpoisk02.controller.lib.LookupId;
-import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
-import com.lista.filmpoisk02.model.Querying;
-
-import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
-
-
+import com.lista.filmpoisk02.controller.lib.LookupId;
+import com.lista.filmpoisk02.model.Page;
+import com.lista.filmpoisk02.model.Querying;
+import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +12,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 
 @RestController
@@ -37,9 +34,9 @@ public class FilmPoiskIdContoller implements Queryinterface {
     }
 
     @RequestMapping("/filmpoisk-id")
-    public Querying Querying(@RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
+    public Querying querying(@RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
 
-        Page oPage01 = new LookupId().Eval(cSeekId, config, omDbApiLookupService);
+        Page oPage01 = new LookupId().eval(cSeekId, config, omDbApiLookupService);
         cSeekId = oPage01.getStatus();
         log.info("oPage01:" + oPage01);
 

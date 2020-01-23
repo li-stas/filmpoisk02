@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class Json2oPage {
     private static final Logger log = LoggerFactory.getLogger(Json2oPage.class);
+
     public Page eval(String cPage, Page oPage01) {
         ObjectMapper mapper = new ObjectMapper();
         try {
