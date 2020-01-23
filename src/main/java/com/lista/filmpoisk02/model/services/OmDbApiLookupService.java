@@ -25,8 +25,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     private static final int CODE_SUCCESS = 100;
     private static final int AUTH_FAILURE = 102;
 
-    //private RestTemplate restTemplate = new RestTemplate();
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate; // private RestTemplate restTemplate = new RestTemplate();
 
     public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
@@ -35,13 +34,11 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     @Async //будет запущен в отдельном потоке
     public Future<Page> findPage(String cUrlKey)  {
 
-        //System.out.println("Looking up " + user);
-        logger.info("  Looking up " + cUrlKey);
+        logger.info("  Looking up " + cUrlKey);//System.out.println("Looking up " + user);
 
         String url = String.format("http://www.omdbapi.com/%s", cUrlKey);
         String cPage = restTemplate.getForObject( url, String.class);
 
-        //logger.info("  cPage " + cPage);
         Page oPage01;
         if (cPage.contains("Error\":")) {
             oPage01 = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);

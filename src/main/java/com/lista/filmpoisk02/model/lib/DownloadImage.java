@@ -24,8 +24,7 @@ public class DownloadImage {
                 Files.deleteIfExists(Paths.get(cImageFile));
                 Files.copy(in, Paths.get(cImageFile));
             } catch (IOException e) {
-               log.error(e.getMessage() + " l:25");
-                //e.printStackTrace();
+               log.error(e.getMessage() + " l:27");//e.printStackTrace();
             }
         }
     }

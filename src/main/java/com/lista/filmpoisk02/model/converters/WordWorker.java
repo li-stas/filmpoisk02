@@ -56,8 +56,8 @@ public class WordWorker {
             // создаем обычный параграф, который будет расположен слева,
             // будет синим курсивом со шрифтом 14 размера
             XWPFParagraph bodyParagraph = docxModel.createParagraph();
-            //bodyParagraph.setAlignment(ParagraphAlignment.RIGHT);
             bodyParagraph.setAlignment(ParagraphAlignment.LEFT);
+            //bodyParagraph.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun paragraphConfig = bodyParagraph.createRun();
             paragraphConfig.setItalic(true);
             paragraphConfig.setFontSize(14);
@@ -78,15 +78,12 @@ public class WordWorker {
             docxModel.write(outputStream);
             outputStream.close();
 
-            log.info("Успешно записан в файл " + cPathAndFileDocx);
-            //System.out.println("Успешно записан в файл " + cPathAndFileDocx);
+            log.info("Успешно записан в файл " + cPathAndFileDocx);            //System.out.println("Успешно записан в файл " + cPathAndFileDocx);
 
         } catch (FileNotFoundException e) {
-            //System.out.println(e.getMessage());
-            log.error(e.getMessage() + " " + cPathAndFileDocx);
+            log.error(e.getMessage() + " " + cPathAndFileDocx);//System.out.println(e.getMessage());
         } catch (Exception e) {
-            //e.printStackTrace();
-            log.error(e.getMessage());
+            log.error(e.getMessage());//e.printStackTrace();
         }
         return cPathAndFileDocx;
     }

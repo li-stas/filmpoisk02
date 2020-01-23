@@ -83,11 +83,11 @@ public class FilmPoiskNmContoller implements Queryinterface {
             try {
                 log.info("  --> " + thr[i].get());
             } catch (InterruptedException e) {
-                log.error(e.getMessage() + " InterruptedException");
-                //e.printStackTrace();
+                log.error(e.getMessage() + " InterruptedException");//e.printStackTrace();
+
             } catch (ExecutionException e) {
-                log.error(e.getMessage() + "ExecutionException");
-                //e.printStackTrace();
+                log.error(e.getMessage() + "ExecutionException");//e.printStackTrace();
+
             }
         }
     }
@@ -105,8 +105,8 @@ public class FilmPoiskNmContoller implements Queryinterface {
                     //log.info("  //10 millisecond pause between each check");
                     Thread.sleep(10); //millisecond pause between each check
                 } catch (InterruptedException e) {
-                    log.error(e.getMessage() + " " + "//millisecond pause between each check");
-                    //e.printStackTrace();
+                    log.error(e.getMessage() + " " + "//millisecond pause between each check");//e.printStackTrace();
+
                 }
             }
         }

@@ -22,8 +22,7 @@ public class Json2oPage {
             oPage01.setProduction((String) mapPage.get("Production"));
             oPage01.setPoster((String) mapPage.get("Poster"));
         } catch (Exception e) {
-            log.error(e.getMessage());
-            //e.printStackTrace();
+            log.error(e.getMessage());//e.printStackTrace();
         }
         return oPage01;
     }

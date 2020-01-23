@@ -69,8 +69,6 @@ public class Page {
         int nPosPoint = poster.lastIndexOf(".");
         if (nPosPoint >= 0 ) {
             this.posterImg = imdbID + poster.substring(nPosPoint);
-            // String cExt = poster.substring(poster.lastIndexOf("."));
-            // System.out.println("cExt ="+cExt);
             new DownloadImage().eval(poster, posterImg );
         } else {
             posterImg = null;

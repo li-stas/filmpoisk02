@@ -31,12 +31,12 @@ public class WordRepl {
             FileOutputStream out = new FileOutputStream(cFile);
             document.write(out);
             out.close();
-            //document.close();
+
             log.info("Успешно записан в файл ->" + cFile);
             //System.out.println("Успешно записан в файл");
         } catch (InvalidFormatException | IOException e) {
-            log.error(e.getMessage());
-            //e.printStackTrace();
+            log.error(e.getMessage());//e.printStackTrace();
+
         }
         return cFile;
     }

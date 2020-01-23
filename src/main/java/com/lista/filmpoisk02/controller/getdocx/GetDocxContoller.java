@@ -47,7 +47,7 @@ public class GetDocxContoller {
         ResponseEntity<InputStreamResource> ret = null;
 
         Page oPage01 = new LookupId().eval(cSeekId, config, omDbApiLookupService);
-        cSeekId = oPage01.getStatus();
+
         log.info("oPage01:" + oPage01);
 
         String cFile;
@@ -57,8 +57,7 @@ public class GetDocxContoller {
         try {
             ret = getFile1.downloadFile1(cFile);
         } catch (IOException e) {
-            log.error(e.getMessage() + "IOException");
-            //e.printStackTrace();
+            log.error(e.getMessage() + "IOException");//e.printStackTrace();
         }
         return ret;
     }
