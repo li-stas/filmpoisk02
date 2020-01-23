@@ -4,7 +4,7 @@ package com.lista.filmpoisk02.controller;
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.Querying;
-import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
+import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,13 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Контроллер  поиска по одному и нескольким наименованим фильма
+ * http://localhost:8080/filmpoisk?name=batmam - одниночный поиск
+ * http://localhost:8080/filmpoisk-nm?name=batman;cat;fire;cat;batman - множественный поиск
+ * слова разделяются ";"
+ *
+ */
 
 @RestController
 @EnableAsync
@@ -31,10 +38,10 @@ public class FilmPoiskNmContoller implements Queryinterface {
     private final AtomicLong counter = new AtomicLong();
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
-    private final OmDbApiLookupService omDbApiLookupService;
+    private final SiteLookupService omDbApiLookupService;
 
     @Autowired
-    public FilmPoiskNmContoller(SpringBootConfiguration config, OmDbApiLookupService omDbApiLookupService) {
+    public FilmPoiskNmContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;
     }
@@ -45,6 +52,7 @@ public class FilmPoiskNmContoller implements Queryinterface {
         log.info("config.getApikey()=" + config.getApikey());
         log.info("--> " + "/filmpoisk-nm " + cName);
 
+        // разбор строки пареметра
         String [] aName = cName.split(";");
         int nLen_aUrl = aName.length;
 
@@ -52,51 +60,15 @@ public class FilmPoiskNmContoller implements Queryinterface {
             log.info("// Start the clock");
             long start = System.currentTimeMillis();
 
-            Future<Page>[] thr = new Future[nLen_aUrl];
-
             log.info("  // постановка всех задач в поток");
-            for (int i = 0; i < nLen_aUrl; i++) {
-
-                String cUrl01 = "?apikey=" + config.getApikey() + "&t=" + aName[i];
-                log.info(String.format("i=%d,aName[i]=%s,cUrl01=%s", i, aName[i], cUrl01));
-                thr[i] = omDbApiLookupService.findPage(cUrl01);
-            }
+            Future<Page>[] thr = getFutures(aName, nLen_aUrl);
 
             log.info("  // Подождите, пока они все не сделали // Wait until they are all done");
-            while (true) {
-                int nChk = 0;
-                for (int i = 0; i < nLen_aUrl; i++) {
-                    nChk += thr[i].isDone() ? 1 : 0;
-                }
-                if (nChk == nLen_aUrl) {
-                    break;
-                } else {
-                    try {
-                        //log.info("  //10 millisecond pause between each check");
-                        Thread.sleep(10); //millisecond pause between each check
-                    } catch (InterruptedException e) {
-                        log.error(e.getMessage() + " " + "//millisecond pause between each check");
-                        //e.printStackTrace();
-                    }
-                }
-            }
+            waitingIsDone(thr, nLen_aUrl);
 
             log.info("  // Print results, including elapsed time");
             log.info("  Elapsed time: " + (System.currentTimeMillis() - start));
-
-            for (int i = 0; i < nLen_aUrl; i++) {
-                try {
-
-                    log.info("  --> " + thr[i].get());
-
-                } catch (InterruptedException e) {
-                    log.error(e.getMessage() + " InterruptedException");
-                    //e.printStackTrace();
-                } catch (ExecutionException e) {
-                    log.error(e.getMessage() + "ExecutionException");
-                    //e.printStackTrace();
-                }
-            }
+            printResult(thr, nLen_aUrl);
 
         } else {
             cName = "Строка поиска с ошибкой =" + cName;
@@ -104,6 +76,51 @@ public class FilmPoiskNmContoller implements Queryinterface {
         }
 
         return new Querying(counter.incrementAndGet(), String.format(template, cName));
+    }
+
+    private void printResult(Future<Page>[] thr, int nLen_aUrl) {
+        for (int i = 0; i < nLen_aUrl; i++) {
+            try {
+                log.info("  --> " + thr[i].get());
+            } catch (InterruptedException e) {
+                log.error(e.getMessage() + " InterruptedException");
+                //e.printStackTrace();
+            } catch (ExecutionException e) {
+                log.error(e.getMessage() + "ExecutionException");
+                //e.printStackTrace();
+            }
+        }
+    }
+
+    private void waitingIsDone(Future<Page>[] thr, int nLen_aUrl) {
+        while (true) {
+            int nChk = 0;
+            for (int i = 0; i < nLen_aUrl; i++) {
+                nChk += thr[i].isDone() ? 1 : 0;
+            }
+            if (nChk == nLen_aUrl) {
+                break;
+            } else {
+                try {
+                    //log.info("  //10 millisecond pause between each check");
+                    Thread.sleep(10); //millisecond pause between each check
+                } catch (InterruptedException e) {
+                    log.error(e.getMessage() + " " + "//millisecond pause between each check");
+                    //e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private Future<Page>[] getFutures(String[] aName, int nLen_aUrl) {
+        Future<Page>[] thr = new Future[nLen_aUrl];
+        for (int i = 0; i < nLen_aUrl; i++) {
+
+            String cUrl01 = "?apikey=" + config.getApikey() + "&t=" + aName[i];
+            log.info(String.format("i=%d,aName[i]=%s,cUrl01=%s", i, aName[i], cUrl01));
+            thr[i] = omDbApiLookupService.findPage(cUrl01);
+        }
+        return thr;
     }
 
 }

@@ -2,12 +2,18 @@ package com.lista.filmpoisk02.controller.lib;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;
-import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
+import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+/**
+ * получение данных с сайта по ключю поиска
+ * входные данные: ключевое слово поиска
+ * возварат: объекта Страница с данными
+ */
 
 public class LookupId {
     private static final Logger log = LoggerFactory.getLogger(LookupId.class);
@@ -17,7 +23,7 @@ public class LookupId {
     private static final int AUTH_FAILURE = 102;
 
     public Page eval(String cSeekId, SpringBootConfiguration config,
-                       OmDbApiLookupService omDbApiLookupService) {
+                     SiteLookupService omDbApiLookupService) {
         String cUrl01;
         Page oPage01 =  new Page(ERROR_STATUS, AUTH_FAILURE);
         //http://localhost:8080/filmpoisk?id=tt3340364

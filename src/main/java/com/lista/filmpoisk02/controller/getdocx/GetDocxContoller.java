@@ -5,8 +5,7 @@ import com.lista.filmpoisk02.controller.lib.LookupId;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.converters.WordRepl;
 import com.lista.filmpoisk02.model.converters.WordWorker;
-import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
-
+import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+/**
+ * Контроллер  поиска по  IMDBID с
+ * сохранение информации в формате MS Word (* .docx) с помощью Apache POI. Шаблон файла разработан заранее
+ */
 
 @RestController
 @EnableAsync
@@ -26,11 +29,11 @@ public class GetDocxContoller {
     private static final Logger log = LoggerFactory.getLogger(GetDocxContoller.class);
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
-    private final OmDbApiLookupService omDbApiLookupService;
+    private final SiteLookupService omDbApiLookupService;
     private final GetFile1 getFile1;
 
     @Autowired
-    public GetDocxContoller(SpringBootConfiguration config, OmDbApiLookupService omDbApiLookupService,
+    public GetDocxContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService,
                             GetFile1 getFile1) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;

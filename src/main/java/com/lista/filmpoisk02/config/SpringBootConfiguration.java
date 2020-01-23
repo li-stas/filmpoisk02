@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ * считывание конфигурационных данных
  * https://www.theserverside.com/video/How-applicationproperties-simplifies-Spring-config
  */
 

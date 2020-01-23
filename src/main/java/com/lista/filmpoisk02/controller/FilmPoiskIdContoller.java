@@ -4,7 +4,7 @@ import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.controller.lib.LookupId;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.Querying;
-import com.lista.filmpoisk02.model.services.OmDbApiLookupService;
+import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Контроллер  поиска по  IMDBID
+ * пример поиска
+ * http://localhost:8080/filmpoisk-id?id=tt0119654
+ */
 
 @RestController
 @EnableAsync
@@ -25,10 +30,10 @@ public class FilmPoiskIdContoller implements Queryinterface {
     private final AtomicLong counter = new AtomicLong();
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
-    private final OmDbApiLookupService omDbApiLookupService;
+    private final SiteLookupService omDbApiLookupService;
 
     @Autowired
-    public FilmPoiskIdContoller(SpringBootConfiguration config, OmDbApiLookupService omDbApiLookupService) {
+    public FilmPoiskIdContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;
     }

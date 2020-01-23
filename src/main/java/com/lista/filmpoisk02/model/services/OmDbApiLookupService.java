@@ -17,7 +17,7 @@ import java.util.concurrent.Future;
  * 2. сервис запросов к GitHub для поиска страниц.
  */
 @Service //делая его кандидатом для сканирования компонентов в Spring для обнаружения и помещения его в
-public class OmDbApiLookupService  { //implements SiteLookupService
+public class OmDbApiLookupService implements SiteLookupService { //implements SiteLookupService
     private static final Logger logger = LoggerFactory.getLogger(OmDbApiLookupService.class);
 
     private static final String SUCCESS_STATUS = "success";

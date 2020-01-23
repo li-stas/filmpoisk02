@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * Контроллер выдаюций приметвие
+ * http://localhost:8080/greeting -> "Hello, World!"
+ * http://localhost:8080/greeting?name=Kate -> "Hello, Kate!"
+ */
 
 @RestController
 public class GreetingController implements Queryinterface {

@@ -17,6 +17,8 @@ import java.io.IOException;
 
 /**
  * https://o7planning.org/ru/11765/spring-boot-file-download-example
+ * возвращающий объект  ResponseEntity, данный объект обертывает (wrap) объект InputStreamResource
+ * (Это данные файла, который скачал пользователь).
  */
 @Component
 public class GetFile1 {
