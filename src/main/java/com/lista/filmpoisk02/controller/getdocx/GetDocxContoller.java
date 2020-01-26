@@ -54,11 +54,13 @@ public class GetDocxContoller {
         cFile = new WordWorker().create(oPage01, "Page01.docx");
 
         cFile = new WordRepl().eval(oPage01, "FilmPoisk.docx");
+
         try {
             ret = getFile1.downloadFile1(cFile);
         } catch (IOException e) {
             log.error(e.getMessage() + "IOException");//e.printStackTrace();
         }
+        log.info("ret:" + ret);
         return ret;
     }
 }

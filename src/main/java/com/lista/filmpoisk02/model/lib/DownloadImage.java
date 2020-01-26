@@ -13,13 +13,14 @@ public class DownloadImage {
     private static final Logger log = LoggerFactory.getLogger(DownloadImage.class);
 
     public synchronized void  eval(String cUrl, String cImageFile)  {
-
         if (!(Files.exists(Paths.get(cImageFile)))) {
-            try(InputStream in = new URL(cUrl).openStream()) {
+            try {
+                InputStream in = new URL(cUrl).openStream();
                 Files.deleteIfExists(Paths.get(cImageFile));
                 Files.copy(in, Paths.get(cImageFile));
             } catch (IOException e) {
-               log.error(e.getMessage() + " l:27");//e.printStackTrace();
+                log.error(e.getMessage() + " l:25");
+                /*e.printStackTrace();*/
             }
         }
     }

@@ -43,7 +43,7 @@ public class GetFile1 {
 
         return ResponseEntity.ok()
                 // Content-Disposition
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName().replaceAll("\\s*,\\s*", "_"))
                 // Content-Type
                 .contentType(mediaType)
                 // Contet-Length
