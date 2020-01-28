@@ -1,10 +1,10 @@
-package com.lista.filmpoisk02.controller;
+package com.lista.filmpoisk02.controller.getdocx;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
-import com.lista.filmpoisk02.controller.getdocx.GetFile1;
 import com.lista.filmpoisk02.controller.lib.LookupId;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.converters.WordRepl;
+import com.lista.filmpoisk02.model.converters.WordWorker;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,8 +54,8 @@ public class GetDocxContoller {
         // генрерация нового д-та
         // cFile = new WordWorker().create(oPage01, "Page01.docx");
 
-        // замены в шаблоне c сохранением в файл
-        cFile = new WordRepl().saveToFile(oPage01, "FilmPoisk.docx", "");
+        // замены в шаблоне
+        cFile = new WordRepl().eval(oPage01, "FilmPoisk.docx");
         try {
             ret = getFile1.downloadFile1(cFile);
         } catch (IOException e) {
