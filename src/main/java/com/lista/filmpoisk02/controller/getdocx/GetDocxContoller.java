@@ -51,8 +51,10 @@ public class GetDocxContoller {
         log.info("oPage01:" + oPage01);
 
         String cFile;
-        cFile = new WordWorker().create(oPage01, "Page01.docx");
+        // генрерация нового д-та
+        // cFile = new WordWorker().create(oPage01, "Page01.docx");
 
+        // замены в шаблоне
         cFile = new WordRepl().eval(oPage01, "FilmPoisk.docx");
 
         try {
