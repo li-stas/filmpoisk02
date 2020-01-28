@@ -99,9 +99,6 @@ public class Page {
         this.code = code;
     }
 
-    public void json2oPage(String cJson) {
-
-    }
 
     @Override
     public String toString() {
