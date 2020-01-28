@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Контроллер  поиска по одному и нескольким наименованим фильма
  * http://localhost:8080/filmpoisk?name=batmam - одниночный поиск
- * http://localhost:8080/filmpoisk-nm?name=batman;cat;fire;cat;batman - множественный поиск
+ * http://localhost:8080/filmpoisk-nm?name=batman;cat;fire;cat;batman - множественный поиск *
  * слова разделяются ";"
  *
  */
@@ -29,10 +29,6 @@ import java.util.concurrent.atomic.AtomicLong;
 @EnableAsync
 public class FilmPoiskNmContoller implements Queryinterface {
     private static final Logger log = LoggerFactory.getLogger(FilmPoiskNmContoller.class);
-    private static final String SUCCESS_STATUS = "success";
-    private static final String ERROR_STATUS = "error";
-    private static final int CODE_SUCCESS = 100;
-    private static final int AUTH_FAILURE = 102;
 
     private static final String template = "FilmPoiskNm, %s";
     private final AtomicLong counter = new AtomicLong();
@@ -48,7 +44,7 @@ public class FilmPoiskNmContoller implements Queryinterface {
 
     @RequestMapping("/filmpoisk-nm")
     public Querying querying(@RequestParam(value = "name", required = false, defaultValue = "batman") String cName) {
-        //http://localhost:8080/filmpoisk?name=Stas
+
         log.info("config.getApikey()=" + config.getApikey());
         log.info("--> " + "/filmpoisk-nm " + cName);
 

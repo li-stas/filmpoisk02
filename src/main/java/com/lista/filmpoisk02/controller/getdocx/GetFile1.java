@@ -24,7 +24,6 @@ import java.io.IOException;
 public class GetFile1 {
     private static final Logger log = LoggerFactory.getLogger(GetFile1.class);
     private static final String DIRECTORY = ".";
-    private static final String DEFAULT_FILE_NAME = "FilmPoisk.docx";
 
     private ServletContext servletContext;
    @Autowired

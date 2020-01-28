@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
+ * //http://localhost:8080/filmpoisk?id=tt3340364
  * получение данных с сайта по ключю поиска
  * входные данные: ключевое слово поиска
  * возварат: объекта Страница с данными
@@ -25,11 +26,13 @@ public class LookupId {
     public Page eval(String cSeekId, SpringBootConfiguration config,
                      SiteLookupService omDbApiLookupService) {
         String cUrl01;
-        Page oPage01 =  new Page(ERROR_STATUS, AUTH_FAILURE);
-        //http://localhost:8080/filmpoisk?id=tt3340364
+
+        Page oPage01 =  new Page(SUCCESS_STATUS, CODE_SUCCESS);
+        oPage01.setStatus(ERROR_STATUS);
+        oPage01.setCode(AUTH_FAILURE);
+
         log.info("--> " + "/filmpoisk-id");
         log.info("  config.getApikey()=" + config.getApikey());
-
 
         cUrl01 = "?apikey=" + config.getApikey() + "&i=" + cSeekId;
         log.info("cUrl01=" + cUrl01);
