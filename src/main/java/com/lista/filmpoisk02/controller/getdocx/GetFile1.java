@@ -25,7 +25,7 @@ public class GetFile1 {
     private static final Logger log = LoggerFactory.getLogger(GetFile1.class);
     private static final String DIRECTORY = ".";
 
-    private ServletContext servletContext;
+    private final ServletContext servletContext;
    @Autowired
     public GetFile1(ServletContext servletContext) {
         this.servletContext = servletContext;
