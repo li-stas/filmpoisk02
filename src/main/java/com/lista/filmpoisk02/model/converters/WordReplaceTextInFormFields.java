@@ -9,6 +9,7 @@ import org.apache.xmlbeans.XmlObject;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Objects;
 
 
 /**
@@ -30,7 +31,7 @@ public class WordReplaceTextInFormFields {
                         cursor.toParent();
                         obj = cursor.getObject();
                         obj = obj.selectPath("declare namespace w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' .//w:ffData/w:name/@w:val")[0];
-                        foundformfield = ffname.equals(((SimpleValue) obj).getStringValue());
+                        foundformfield = Objects.equals(ffname, ((SimpleValue) obj).getStringValue());
                     } else if ("end".equals(((SimpleValue)obj).getStringValue())) {
                         if (foundformfield) {
                             return;
