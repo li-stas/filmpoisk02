@@ -35,8 +35,7 @@ public class WordRepl {
             log.info("Успешно записан в файл ->" + cFile);
             //System.out.println("Успешно записан в файл");
         } catch (InvalidFormatException | IOException e) {
-            log.error(e.getMessage());//e.printStackTrace();
-
+            log.error(e.getMessage(), e);
         }
         return cFile;
     }

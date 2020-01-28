@@ -79,11 +79,10 @@ public class FilmPoiskNmContoller implements Queryinterface {
             try {
                 log.info("  --> " + thr[i].get());
             } catch (InterruptedException e) {
-                log.error(e.getMessage() + " InterruptedException");//e.printStackTrace();
+                log.error(e.getMessage() + " InterruptedException", e);
 
             } catch (ExecutionException e) {
-                log.error(e.getMessage() + "ExecutionException");//e.printStackTrace();
-
+                log.error(e.getMessage() + "ExecutionException", e);
             }
         }
     }

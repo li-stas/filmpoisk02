@@ -48,10 +48,10 @@ public class LookupId {
             oPage01 = result.get();
 
         } catch (InterruptedException e) {
-            log.error(e.getMessage() + " InterruptedException");
+            log.error(e.getMessage() + " InterruptedException", e);
             //e.printStackTrace();
         } catch (ExecutionException e) {
-            log.error(e.getMessage() + "ExecutionException");
+            log.error(e.getMessage() + "ExecutionException", e);
             //e.printStackTrace();
         }
 

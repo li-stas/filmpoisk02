@@ -58,7 +58,7 @@ public class GetDocxContoller {
         try {
             ret = getFile1.downloadFile1(cFile);
         } catch (IOException e) {
-            log.error(e.getMessage() + "IOException");//e.printStackTrace();
+            log.error(e.getMessage() + "IOException", e);
         }
         log.info("ret:" + ret);
         return ret;
