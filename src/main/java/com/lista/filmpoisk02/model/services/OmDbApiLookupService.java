@@ -2,10 +2,13 @@ package com.lista.filmpoisk02.model.services;
 
 
 import com.lista.filmpoisk02.model.Page;
+import com.lista.filmpoisk02.model.lib.Json2Page;
 import com.lista.filmpoisk02.model.lib.Json2oPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -25,10 +28,14 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     private static final int CODE_SUCCESS = 100;
     private static final int AUTH_FAILURE = 102;
 
-    private RestTemplate restTemplate; // private RestTemplate restTemplate = new RestTemplate();
+    //@Autowired
+    private final ConversionService conversionService;
 
-    public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder) {
+    private final RestTemplate restTemplate; // private RestTemplate restTemplate = new RestTemplate();
+
+    public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService) {
         this.restTemplate = restTemplateBuilder.build();
+        this.conversionService = conversionService;
     }
 
     @Async //будет запущен в отдельном потоке
@@ -40,11 +47,17 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         String cPage = restTemplate.getForObject( url, String.class);
 
         Page oPage01;
+
         if (cPage.contains("Error\":")) {
             oPage01 = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);
         } else {
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
-            oPage01 = new Json2oPage().eval(cPage, oPage01);
+            if (false) {
+                oPage01 = new Json2oPage().eval(cPage, oPage01);
+            } else {
+                oPage01 = new Json2Page(conversionService).eval(cPage, oPage01);
+            }
+
         }
         //Thread.sleep(1000L);
         return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса

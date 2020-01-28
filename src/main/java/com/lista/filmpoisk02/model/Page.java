@@ -26,6 +26,15 @@ public class Page {
         this.code = code;
     }
 
+    public Page(String imdbID, String title, int year, String production, String poster, String status, int code) {
+        this.imdbID = imdbID;
+        this.title = title;
+        this.year = year;
+        this.production = production;
+        setPoster(poster);
+        this.status = status;
+        this.code = code;
+    }
 
     public String getImdbID() {
         return imdbID;

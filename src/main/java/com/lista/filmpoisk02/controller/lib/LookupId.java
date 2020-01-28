@@ -51,10 +51,8 @@ public class LookupId {
 
         } catch (InterruptedException e) {
             log.error(e.getMessage() + " InterruptedException", e);
-            //e.printStackTrace();
         } catch (ExecutionException e) {
             log.error(e.getMessage() + "ExecutionException", e);
-            //e.printStackTrace();
         }
 
         if (oPage01.getCode() == 102) {
