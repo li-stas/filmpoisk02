@@ -1,5 +1,6 @@
 package com.lista.filmpoisk02.model;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
 /**
@@ -29,10 +30,7 @@ public class Querying {
 
     @Override
     public String toString() {
-        return "Querying{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                '}';
+        return MessageFormat.format("Querying'{'id={0}, content=''{1}'''}'", id, content);
     }
 
     @Override

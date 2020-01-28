@@ -27,7 +27,7 @@ public class WordRepl {
 
             new WordAddImgFile().eval(document, oPage);
 
-            cFile = oPage.getTitle()  + "(" + oPage.getImdbID() + ")" + ".docx";
+            cFile = new StringBuilder().append(oPage.getTitle()).append("(").append(oPage.getImdbID()).append(")").append(".docx").toString();
             FileOutputStream out = new FileOutputStream(cFile);
             document.write(out);
             out.close();

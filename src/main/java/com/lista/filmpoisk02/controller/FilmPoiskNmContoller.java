@@ -100,7 +100,7 @@ public class FilmPoiskNmContoller implements Queryinterface {
                     //log.info("  //10 millisecond pause between each check");
                     Thread.sleep(10); //millisecond pause between each check
                 } catch (InterruptedException e) {
-                    log.error(e.getMessage() + " " + "//millisecond pause between each check");//e.printStackTrace();
+                    log.error(e.getMessage() + " " + "//millisecond pause between each check", e);
 
                 }
             }
