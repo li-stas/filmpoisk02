@@ -26,17 +26,15 @@ public class LookupId {
     public Page eval(String cSeekId, SpringBootConfiguration config,
                      SiteLookupService omDbApiLookupService) {
         String cUrl01;
-        Page oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
+
+        Page oPage01 =  new Page(SUCCESS_STATUS, CODE_SUCCESS);
         oPage01.setStatus(ERROR_STATUS);
         oPage01.setCode(AUTH_FAILURE);
 
         log.info("--> " + "/filmpoisk-id");
         log.info("  config.getApikey()=" + config.getApikey());
 
-
-        cUrl01 = new StringBuilder().append("?apikey=").append(config.getApikey()).
-                append("&i=").append(cSeekId).toString();
-
+        cUrl01 = "?apikey=" + config.getApikey() + "&i=" + cSeekId;
         log.info("cUrl01=" + cUrl01);
         log.info("  // чтение из сайта cUrl01");
         Future<Page> result = omDbApiLookupService.findPage(cUrl01);
@@ -51,8 +49,10 @@ public class LookupId {
 
         } catch (InterruptedException e) {
             log.error(e.getMessage() + " InterruptedException", e);
+            //e.printStackTrace();
         } catch (ExecutionException e) {
             log.error(e.getMessage() + "ExecutionException", e);
+            //e.printStackTrace();
         }
 
         if (oPage01.getCode() == 102) {
@@ -61,7 +61,7 @@ public class LookupId {
         } else {
             log.info("oPage01:" + oPage01);
         }
-        oPage01.setStatus(oPage01.getStatus() + " " + cSeekId);
+        oPage01.setStatus(oPage01.getStatus() +  " " + cSeekId);
 
         return oPage01;
     }
