@@ -53,7 +53,19 @@ public class WordWorker {
                     new XWPFParagraph[]{footerParagraph}
             );
 
-            createParagraph(docxModel).setText("Title:" + oPage.getTitle());
+            // создаем обычный параграф, который будет расположен слева,
+            // будет синим курсивом со шрифтом 14 размера
+            XWPFParagraph bodyParagraph = docxModel.createParagraph();
+            bodyParagraph.setAlignment(ParagraphAlignment.LEFT);
+            //bodyParagraph.setAlignment(ParagraphAlignment.RIGHT);
+            XWPFRun paragraphConfig = bodyParagraph.createRun();
+            paragraphConfig.setItalic(true);
+            paragraphConfig.setFontSize(14);
+            // HEX цвет без решетки #
+            paragraphConfig.setColor("06357a");
+            paragraphConfig.setText("Title:" + oPage.getTitle());
+
+            //createParagraph(docxModel).setText("Title:" + oPage.getTitle());
             createParagraph(docxModel).setText("imdbID:" + oPage.getImdbID());
             createParagraph(docxModel).setText("year:" + oPage.getYear());
             createParagraph(docxModel).setText("production:" + oPage.getProduction());
@@ -96,6 +108,7 @@ public class WordWorker {
         cttHeader.setStringValue(headerContent);
         return ctpHeaderModel;
     }
+
     private static XWPFRun createParagraph(XWPFDocument docxModel) {
         // создаем обычный параграф, который будет расположен слева,
                 // будет синим курсивом со шрифтом 14 размера
