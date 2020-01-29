@@ -44,7 +44,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         logger.info("  Looking up " + cUrlKey);//System.out.println("Looking up " + user);
 
         String url = String.format("http://www.omdbapi.com/%s", cUrlKey);
-        String cPage = restTemplate.getForObject( url, String.class);
+        String cPage = restTemplate.getForObject(url, String.class);
 
         Page oPage01;
 

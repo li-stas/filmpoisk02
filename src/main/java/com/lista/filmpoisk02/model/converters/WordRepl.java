@@ -12,13 +12,32 @@ import java.io.IOException;
 
 public class WordRepl {
     private static final Logger log = LoggerFactory.getLogger(WordRepl.class);
-    public String eval(Page oPage, String cPathAndFileDotx) {
-        String cFile = cPathAndFileDotx;
 
+    public String saveToFile(Page oPage, String cPathAndFileDotx, String cFile) {
+        if (cFile.isEmpty()) {
+            cFile = new StringBuilder().append(oPage.getTitle()).append("(").append(oPage.getImdbID())
+                    .append(")").append(".docx").toString();
+        }
         try {
-            WordReplaceTextInFormFields wrtiff =  new WordReplaceTextInFormFields();
-            XWPFDocument document = new XWPFDocument(new FileInputStream(cPathAndFileDotx));
+            XWPFDocument document = getXWPFDocument(oPage, cPathAndFileDotx);
 
+            FileOutputStream out = new FileOutputStream(cFile);
+            document.write(out);
+            out.close();
+
+            log.info("Успешно записан в файл ->" + cFile);
+
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return cFile;
+    }
+
+    public XWPFDocument getXWPFDocument(Page oPage, String cPathAndFileDotx)  {
+        WordReplaceTextInFormFields wrtiff =  new WordReplaceTextInFormFields();
+        XWPFDocument document = null;
+        try {
+            document = new XWPFDocument(new FileInputStream(cPathAndFileDotx));
             WordReplaceTextInFormFields.replaceFormFieldText(document, "title", oPage.getTitle());
             WordReplaceTextInFormFields.replaceFormFieldText(document, "imdbID", oPage.getImdbID());
             WordReplaceTextInFormFields.replaceFormFieldText(document, "year", String.format("%d",oPage.getYear()));
@@ -27,17 +46,11 @@ public class WordRepl {
 
             new WordAddImgFile().eval(document, oPage);
 
-            cFile = new StringBuilder().append(oPage.getTitle()).append("(").append(oPage.getImdbID()).append(")").append(".docx").toString();
-            FileOutputStream out = new FileOutputStream(cFile);
-            document.write(out);
-            out.close();
-
-            log.info("Успешно записан в файл ->" + cFile);
-            //System.out.println("Успешно записан в файл");
         } catch (InvalidFormatException | IOException e) {
             log.error(e.getMessage(), e);
         }
-        return cFile;
+
+        return document;
     }
 
 
