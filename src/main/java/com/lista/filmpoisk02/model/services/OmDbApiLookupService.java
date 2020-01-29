@@ -6,7 +6,6 @@ import com.lista.filmpoisk02.model.lib.Json2Page;
 import com.lista.filmpoisk02.model.lib.Json2oPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.scheduling.annotation.Async;
