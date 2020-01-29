@@ -1,6 +1,7 @@
-package com.lista.filmpoisk02.controller.getdocx;
+package com.lista.filmpoisk02.controller;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
+import com.lista.filmpoisk02.controller.getdocx.GetFile1;
 import com.lista.filmpoisk02.controller.lib.LookupId;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.converters.WordRepl;
