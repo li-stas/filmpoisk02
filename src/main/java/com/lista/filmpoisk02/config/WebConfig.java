@@ -26,7 +26,8 @@ public class WebConfig implements WebMvcConfigurer {
      * 2. class FilmPoiskIdContoller @RequestMapping(val ...
      * ответ констуируется чз set-теры
      * 3. @XmlRootElement !!!
-     * public class Querying {     *
+     * public class Querying {
+     *
      * @param configurer
      */
     @Override
