@@ -1,5 +1,6 @@
 package com.lista.filmpoisk02.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.text.MessageFormat;
 import java.util.Objects;
 
@@ -11,9 +12,13 @@ import java.util.Objects;
  * Он представляет собой простой java-объект с полями, конструкторами
  * и методами доступа к значениям id и content
  */
+@XmlRootElement
 public class Querying {
-    private final long id;
-    private final String content;
+    private long id;
+    private String content;
+
+    public Querying() {
+    }
 
     public Querying(long id, String content) {
         this.id = id;
@@ -24,8 +29,16 @@ public class Querying {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getContent() {
         return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override

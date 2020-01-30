@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,15 +39,21 @@ public class FilmPoiskIdContoller implements Queryinterface {
         this.omDbApiLookupService = omDbApiLookupService;
     }
 
-    @RequestMapping("/filmpoisk-id")
+    @RequestMapping(value = "/filmpoisk-id",   method = RequestMethod.GET,
+            produces = { "application/json", "application/xml" })
     public Querying querying(@RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
 
         Page oPage01 = new LookupId().eval(cSeekId, config, omDbApiLookupService);
         cSeekId = oPage01.getStatus();
         log.info("oPage01:" + oPage01);
 
-        return new Querying(counter.incrementAndGet(), String.format(template, cSeekId));
+        /*Querying querying = new Querying(counter.incrementAndGet(), String.format(template, cSeekId));*/
+        Querying querying = new Querying();
+        querying.setId(counter.incrementAndGet());
+        querying.setContent(String.format(template, cSeekId));
+        return querying;
     }
+
 
 
 }
