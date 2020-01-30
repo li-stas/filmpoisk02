@@ -44,6 +44,7 @@ public class WebConfig implements WebMvcConfigurer {
         mediaType("json", MediaType.APPLICATION_JSON);
     }
 }
+
 /*
  String config;
         //config = "Using Path Parameters";
