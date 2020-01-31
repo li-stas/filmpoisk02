@@ -44,4 +44,34 @@ public class WebConfig implements WebMvcConfigurer {
         mediaType("json", MediaType.APPLICATION_JSON);
     }
 }
+/*
+ String config;
+        //config = "Using Path Parameters";
+        config = "Using Path Extension";
 
+        if (config.contains("Using Path Parameters")) {
+            log.info("config.contains(\"Using Path Parameters\")");
+            // установить расширение пути в false
+            configurer.favorPathExtension(false).
+                    // параметр запроса (по умолчанию "format") должен использоваться для определения запрошенного типа медиа
+                            favorParameter(true).
+                    // параметр favor установлен на «mediaType» вместо «format» по умолчанию
+                            parameterName("mediaType").
+                    // игнорируем заголовки принятия
+                            ignoreAcceptHeader(true).
+                    defaultContentType(MediaType.APPLICATION_JSON).
+                    mediaType("xml", MediaType.APPLICATION_XML).
+                    mediaType("json", MediaType.APPLICATION_JSON);
+        } else if (config.contains("Using Path Extension")) {
+            log.info("config.contains(\"Using Path Extension\")");
+            // установить расширение пути в true
+            configurer.favorPathExtension(true).
+                    // установить параметр предпочтения в false
+                            favorParameter(false).
+                    // игнорируем заголовки принятия
+                            ignoreAcceptHeader(true).
+                    defaultContentType(MediaType.APPLICATION_JSON).
+                    mediaType("xml", MediaType.APPLICATION_XML).
+                    mediaType("json", MediaType.APPLICATION_JSON);
+        }
+ */

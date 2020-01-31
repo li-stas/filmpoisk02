@@ -6,10 +6,8 @@ import com.lista.filmpoisk02.model.converters.Json2Page;
 import com.lista.filmpoisk02.model.converters.Json2oPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
@@ -100,6 +98,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
                 log.info("Call conversionService");
                 oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
             }
+
         }
         return oPage01;
     }
