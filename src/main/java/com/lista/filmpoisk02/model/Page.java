@@ -78,11 +78,11 @@ public class Page {
         this.poster = poster;
 
         int nPosPoint = poster.lastIndexOf(".");
-        if (nPosPoint >= 0 ) {
+        if (nPosPoint >= 0) {
             this.posterImg = imdbID + poster.substring(nPosPoint);
             DownloadImage oImg = new DownloadImage();
             this.streamImg = oImg.getStreamImg(poster);
-            oImg.saveTofile(poster, posterImg );
+            oImg.saveTofile(poster, posterImg);
         } else {
             posterImg = null;
         }

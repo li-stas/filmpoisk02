@@ -28,7 +28,7 @@ public class DownloadImage {
      * @param cUrl
      * @return
      */
-    public InputStream getStreamImg(String cUrl){
+    public InputStream getStreamImg(String cUrl) {
         InputStream in = null;
         try {
             in = new URL(cUrl).openStream();

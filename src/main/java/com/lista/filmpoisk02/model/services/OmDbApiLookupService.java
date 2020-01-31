@@ -74,7 +74,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
             url = builder.buildAndExpand(urlParams).toUri().toString();
 
         } else {
-            log.info("  Looking up " + cUrlKey);//System.out.println("Looking up " + user);
+            log.info("  Looking up " + cUrlKey); //System.out.println("Looking up " + user);
             url = String.format("http://www.omdbapi.com/%s", cUrlKey);
         }
 
@@ -104,3 +104,4 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     }
 
 }
+
