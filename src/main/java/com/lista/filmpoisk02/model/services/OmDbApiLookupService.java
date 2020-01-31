@@ -100,7 +100,6 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
                 log.info("Call conversionService");
                 oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
             }
-
         }
         return oPage01;
     }
