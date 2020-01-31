@@ -2,6 +2,7 @@ package com.lista.filmpoisk02.model;
 
 import com.lista.filmpoisk02.model.converters.DownloadImage;
 
+import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -12,8 +13,9 @@ public class Page {
     private String title;
     private int year;
     private String production;
-    private String poster;
+    private String poster; // URL poster
     private String posterImg;
+    private InputStream streamImg;
 
     private String status;
     private int code;
@@ -78,7 +80,9 @@ public class Page {
         int nPosPoint = poster.lastIndexOf(".");
         if (nPosPoint >= 0 ) {
             this.posterImg = imdbID + poster.substring(nPosPoint);
-            new DownloadImage().eval(poster, posterImg );
+            DownloadImage oImg = new DownloadImage();
+            this.streamImg = oImg.getStreamImg(poster);
+            oImg.saveTofile(poster, posterImg );
         } else {
             posterImg = null;
         }
@@ -108,6 +112,13 @@ public class Page {
         this.code = code;
     }
 
+    public InputStream getStreamImg() {
+        return streamImg;
+    }
+
+    public void setStreamImg(InputStream streamImg) {
+        this.streamImg = streamImg;
+    }
 
     @Override
     public String toString() {
