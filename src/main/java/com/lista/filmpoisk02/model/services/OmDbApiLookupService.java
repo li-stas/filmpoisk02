@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
  */
 @Service //делая его кандидатом для сканирования компонентов в Spring для обнаружения и помещения его в
 public class OmDbApiLookupService implements SiteLookupService { //implements SiteLookupService
-    private static final Logger logger = LoggerFactory.getLogger(OmDbApiLookupService.class);
+    private static final Logger log = LoggerFactory.getLogger(OmDbApiLookupService.class);
 
     private static final String SUCCESS_STATUS = "success";
     private static final String ERROR_STATUS = "error";
@@ -40,7 +40,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     @Async //будет запущен в отдельном потоке
     public Future<Page> findPage(String cUrlKey)  {
 
-        logger.info("  Looking up " + cUrlKey);//System.out.println("Looking up " + user);
+        log.info("  Looking up " + cUrlKey);//System.out.println("Looking up " + user);
 
         String url = String.format("http://www.omdbapi.com/%s", cUrlKey);
         String cPage = restTemplate.getForObject(url, String.class);
@@ -52,9 +52,11 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         } else {
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
             if (false) {
+                log.info("Call String -> oPage");
                 oPage01 = new Json2oPage().eval(cPage, oPage01);
             } else {
-                oPage01 = new Json2Page(conversionService).eval(cPage, oPage01);
+                log.info("Call conversionService");
+                oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
             }
 
         }
