@@ -1,9 +1,9 @@
 package com.lista.filmpoisk02.controller;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
-import com.lista.filmpoisk02.controller.lib.LookupId;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.Querying;
+import com.lista.filmpoisk02.model.lib.LookupId;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.controller.lib;
+package com.lista.filmpoisk02.model.lib;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;

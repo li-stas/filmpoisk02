@@ -7,8 +7,6 @@ import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlObject;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.Objects;
 
 
@@ -45,8 +43,11 @@ public class WordReplaceTextInFormFields {
             }
         }
     }
+    /**
+     * разкоментировать для тестирования как отдельного класса.
+     */
 
-    public static void main(String[] args) throws Exception {
+  /*  public static void main(String[] args) throws Exception {
 
         XWPFDocument document = new XWPFDocument(new FileInputStream("FilmPoisk.dotx"));
 
@@ -60,5 +61,5 @@ public class WordReplaceTextInFormFields {
         document.write(out);
         out.close(); //document.close();
 
-    }
+    }*/
 }
