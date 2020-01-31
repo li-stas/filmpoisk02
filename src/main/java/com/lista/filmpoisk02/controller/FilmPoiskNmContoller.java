@@ -113,7 +113,7 @@ public class FilmPoiskNmContoller implements Queryinterface {
 
             String cUrl01 = "?apikey=" + config.getApikey() + "&t=" + aName[i];
             log.info(String.format("i=%d,aName[i]=%s,cUrl01=%s", i, aName[i], cUrl01));
-            thr[i] = omDbApiLookupService.findPage(cUrl01);
+            thr[i] = omDbApiLookupService.findPage(cUrl01, config.getApikey(), cUrl01);
         }
         return thr;
     }

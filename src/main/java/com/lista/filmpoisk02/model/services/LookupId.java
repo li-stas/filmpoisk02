@@ -36,7 +36,7 @@ public class LookupId {
         cUrl01 = "?apikey=" + config.getApikey() + "&i=" + cSeekId;
         log.info("cUrl01=" + cUrl01);
         log.info("  // чтение из сайта cUrl01");
-        Future<Page> result = omDbApiLookupService.findPage(cUrl01);
+        Future<Page> result = omDbApiLookupService.findPage(cUrl01, config.getApikey(), cSeekId);
 
         try {
 
