@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.model.lib;
+package com.lista.filmpoisk02.model.converters;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

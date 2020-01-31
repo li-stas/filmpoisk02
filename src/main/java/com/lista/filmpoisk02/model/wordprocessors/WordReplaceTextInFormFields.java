@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.model.converters;
+package com.lista.filmpoisk02.model.wordprocessors;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;

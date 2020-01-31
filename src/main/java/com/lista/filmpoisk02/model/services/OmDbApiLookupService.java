@@ -2,8 +2,8 @@ package com.lista.filmpoisk02.model.services;
 
 
 import com.lista.filmpoisk02.model.Page;
-import com.lista.filmpoisk02.model.lib.Json2Page;
-import com.lista.filmpoisk02.model.lib.Json2oPage;
+import com.lista.filmpoisk02.model.converters.Json2Page;
+import com.lista.filmpoisk02.model.converters.Json2oPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;

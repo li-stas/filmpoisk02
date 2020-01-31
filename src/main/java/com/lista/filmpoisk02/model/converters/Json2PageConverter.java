@@ -1,8 +1,9 @@
-package com.lista.filmpoisk02.model.lib;
+package com.lista.filmpoisk02.model.converters;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lista.filmpoisk02.model.Page;
+import com.lista.filmpoisk02.model.converters.Json2oPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;

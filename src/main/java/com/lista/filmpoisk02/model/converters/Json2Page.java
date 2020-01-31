@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.model.lib;
+package com.lista.filmpoisk02.model.converters;
 
 import com.lista.filmpoisk02.model.Page;
 import org.springframework.beans.factory.annotation.Autowired;

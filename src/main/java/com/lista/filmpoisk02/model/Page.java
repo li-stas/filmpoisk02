@@ -1,6 +1,6 @@
 package com.lista.filmpoisk02.model;
 
-import com.lista.filmpoisk02.model.lib.DownloadImage;
+import com.lista.filmpoisk02.model.converters.DownloadImage;
 
 import java.util.Objects;
 

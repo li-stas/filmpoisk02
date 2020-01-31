@@ -1,6 +1,6 @@
 package com.lista.filmpoisk02.config;
 
-import com.lista.filmpoisk02.model.lib.Json2PageConverter;
+import com.lista.filmpoisk02.model.converters.Json2PageConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;

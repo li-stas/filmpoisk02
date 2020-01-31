@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.model.converters;
+package com.lista.filmpoisk02.model.wordprocessors;
 
 import com.lista.filmpoisk02.model.Page;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
