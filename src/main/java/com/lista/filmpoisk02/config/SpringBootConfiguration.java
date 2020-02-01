@@ -9,18 +9,14 @@ import org.springframework.stereotype.Component;
  *
  */
 
-@ConfigurationProperties(prefix = "ini.api")
+@ConfigurationProperties(prefix="ini.api")
 @Component
 public class SpringBootConfiguration {
     private String apikey = "######";
 
-    public String getApikey() {
-        return apikey;
-    }
+    public String getApikey() { return apikey; }
 
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
-    }
+    public void setApikey(String apikey) { this.apikey = apikey;  }
 
     @Override
     public String toString() {

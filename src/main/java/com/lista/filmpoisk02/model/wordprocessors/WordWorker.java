@@ -70,9 +70,9 @@ public class WordWorker {
             log.info("Успешно записан в файл " + cPathAndFileDocx);            //System.out.println("Успешно записан в файл " + cPathAndFileDocx);
 
         } catch (FileNotFoundException e) {
-            log.error(e.getMessage() + " " + cPathAndFileDocx); //System.out.println(e.getMessage());
+            log.error(e.getMessage() + " " + cPathAndFileDocx);//System.out.println(e.getMessage());
         } catch (Exception e) {
-            log.error(e.getMessage()); //e.printStackTrace();
+            log.error(e.getMessage());//e.printStackTrace();
         }
         return cPathAndFileDocx;
     }

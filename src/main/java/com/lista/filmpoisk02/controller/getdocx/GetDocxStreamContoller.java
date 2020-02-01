@@ -2,10 +2,10 @@ package com.lista.filmpoisk02.controller.getdocx;
 
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
-import com.lista.filmpoisk02.controller.lib.LookupId;
 import com.lista.filmpoisk02.model.Page;
-import com.lista.filmpoisk02.model.converters.WordRepl;
+import com.lista.filmpoisk02.model.services.LookupId;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
+import com.lista.filmpoisk02.model.wordprocessors.WordRepl;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

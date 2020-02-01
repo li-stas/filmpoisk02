@@ -1,7 +1,6 @@
-package com.lista.filmpoisk02.controller;
+package com.lista.filmpoisk02.controller.getdocx;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
-import com.lista.filmpoisk02.controller.getdocx.GetFile1;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.services.LookupId;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
