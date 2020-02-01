@@ -79,9 +79,9 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         }
 
         cPage = restTemplate.getForObject(url, String.class);
-
-        Page oPage01 = getPage(cPage);
         //Thread.sleep(1000L);
+        Page oPage01 = getPage(cPage);
+
         return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса
     }
 
