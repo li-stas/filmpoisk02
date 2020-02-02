@@ -1,10 +1,13 @@
-package com.lista.filmpoisk02.controller.getdocx;
+package com.lista.filmpoisk02.controller;
+
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;
+import com.lista.filmpoisk02.model.services.GetDocxStream;
 import com.lista.filmpoisk02.model.services.LookupId;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
 import com.lista.filmpoisk02.model.wordprocessors.WordRepl;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,39 +27,40 @@ import java.io.IOException;
 
 @RestController
 @EnableAsync
-public class GetDocxContoller {
-    private static final Logger log = LoggerFactory.getLogger(GetDocxContoller.class);
+public class GetDocxStreamContoller {
+    private static final Logger log = LoggerFactory.getLogger(GetDocxStreamContoller.class);
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
-    private final GetFile1 getFile1;
+    private final GetDocxStream getDocxStream;
 
     @Autowired
-    public GetDocxContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService,
-                            GetFile1 getFile1) {
+    public GetDocxStreamContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService,
+                                  GetDocxStream getDocxStream) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;
-        this.getFile1 = getFile1;
+        this.getDocxStream = getDocxStream;
     }
 
-    @RequestMapping("/getdocx")
+    @RequestMapping("/getdocx02")
     public ResponseEntity<InputStreamResource> querying(
             @RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
 
         ResponseEntity<InputStreamResource> ret = null;
-
-        Page oPage01 = new LookupId().eval(cSeekId, config, omDbApiLookupService);
-
-        log.info("oPage01:" + oPage01);
-
+        XWPFDocument docx;
         String cFile;
-        // генрерация нового д-та
-        // cFile = new WordWorker().create(oPage01, "Page01.docx");
+
+        Page oPage = new LookupId().eval(cSeekId, config, omDbApiLookupService);
+
+        log.info("oPage:" + oPage);
+
 
         // замены в шаблоне c сохранением в файл
-        cFile = new WordRepl().saveToFile(oPage01, "FilmPoisk.docx", "");
+        docx = new WordRepl().getXWPFDocument(oPage, "FilmPoisk.docx");
+        cFile = new StringBuilder().append(oPage.getTitle()).append("(").append(oPage.getImdbID())
+                .append(")").append(".docx").toString();
         try {
-            ret = getFile1.downloadFile1(cFile);
+            ret = getDocxStream.download(docx, cFile);
         } catch (IOException e) {
             log.error(e.getMessage() + "IOException", e);
         }

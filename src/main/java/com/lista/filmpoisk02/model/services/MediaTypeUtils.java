@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.controller.getdocx;
+package com.lista.filmpoisk02.model.services;
 
 import org.springframework.http.MediaType;
 

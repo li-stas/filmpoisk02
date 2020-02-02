@@ -1,4 +1,4 @@
-package com.lista.filmpoisk02.controller.getdocx;
+package com.lista.filmpoisk02.model.services;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
@@ -23,14 +23,13 @@ import java.io.IOException;
  * (Это данные файла, который скачал пользователь).
  */
 @Component
-public class GetStream1 {
-    private static final Logger log = LoggerFactory.getLogger(GetFile1.class);
+public class GetDocxStream {
+    private static final Logger log = LoggerFactory.getLogger(GetDocxStream.class);
     private static final String DIRECTORY = ".";
 
     private final ServletContext servletContext;
-
     @Autowired
-    public GetStream1(ServletContext servletContext) {
+    public GetDocxStream(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
