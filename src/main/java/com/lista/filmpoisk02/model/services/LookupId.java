@@ -1,6 +1,7 @@
 package com.lista.filmpoisk02.model.services;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
+import com.lista.filmpoisk02.model.Debug;
 import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,15 +31,20 @@ public class LookupId {
         oPage01.setStatus(ERROR_STATUS);
         oPage01.setCode(AUTH_FAILURE);
 
-        log.info("--> " + "/filmpoisk-id");
-        log.info("  config.getApikey()=" + config.getApikey());
 
+        if (Debug.FALSE) {
+            log.info("--> " + "/filmpoisk-id");
+            log.info("  config.getApikey()=" + config.getApikey());
 
-        cUrl01 = new StringBuilder().append("?apikey=").append(config.getApikey()).
-                append("&i=").append(cSeekId).toString();
+            cUrl01 = new StringBuilder().append("?apikey=").append(config.getApikey()).
+                    append("&i=").append(cSeekId).toString();
 
-        log.info("cUrl01=" + cUrl01);
-        log.info("  // чтение из сайта cUrl01");
+            log.info("cUrl01=" + cUrl01);
+            log.info("  // чтение из сайта cUrl01");
+        } else {
+             cUrl01 = "";
+        }
+
         Future<Page> result = omDbApiLookupService.findPage(cUrl01, config.getApikey(), cSeekId);
 
         try {
