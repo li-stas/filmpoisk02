@@ -47,10 +47,10 @@ public class FilmPoiskIdContoller implements Queryinterface {
         cSeekId = oPage01.getStatus();
         log.info("oPage01:" + oPage01);
 
-        /*Querying querying = new Querying(counter.incrementAndGet(), String.format(template, cSeekId));*/
         Querying querying = new Querying();
         querying.setId(counter.incrementAndGet());
         querying.setContent(String.format(template, cSeekId));
+
         return querying;
     }
 

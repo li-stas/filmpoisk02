@@ -24,7 +24,6 @@ public class WordAddImgFile {
             title.setAlignment(ParagraphAlignment.CENTER);
 
             String cImageFile = oPage.getPosterImg();
-            //FileInputStream is = new FileInputStream(cImageFile);
             InputStream is = oPage.getStreamImg();
 
             log.info("InputStream is = oPage.getStreamImg();");

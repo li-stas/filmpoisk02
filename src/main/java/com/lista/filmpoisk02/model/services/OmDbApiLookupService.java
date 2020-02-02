@@ -32,8 +32,8 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
 
     //@Autowired
     private final ConversionService conversionService;
-
-    private final RestTemplate restTemplate; // private RestTemplate restTemplate = new RestTemplate();
+    // вариант инициализаци без конструктора private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService) {
         this.restTemplate = restTemplateBuilder.build();
@@ -74,12 +74,12 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
             url = builder.buildAndExpand(urlParams).toUri().toString();
 
         } else {
-            log.info("  Looking up " + cUrlKey);//System.out.println("Looking up " + user);
+            log.info("  Looking up " + cUrlKey);
             url = String.format("http://www.omdbapi.com/%s", cUrlKey);
         }
 
         cPage = restTemplate.getForObject(url, String.class);
-        //Thread.sleep(1000L);
+
         Page oPage01 = getPage(cPage);
 
         return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса

@@ -38,7 +38,7 @@ public class WordReplaceTextInFormFields {
                     }
                 }
                 if (foundformfield && run.getCTR().getTList().size() > 0) {
-                    run.getCTR().getTList().get(0).setStringValue(text); //System.out.println(run.getCTR());
+                    run.getCTR().getTList().get(0).setStringValue(text);
                 }
             }
         }
@@ -47,7 +47,8 @@ public class WordReplaceTextInFormFields {
      * разкоментировать для тестирования как отдельного класса.
      */
 
-  /*  public static void main(String[] args) throws Exception {
+  /* разкоментировать для тестирования как отдельного класса.
+  public static void main(String[] args) throws Exception {
 
         XWPFDocument document = new XWPFDocument(new FileInputStream("FilmPoisk.dotx"));
 
