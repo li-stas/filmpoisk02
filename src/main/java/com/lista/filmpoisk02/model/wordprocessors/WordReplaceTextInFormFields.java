@@ -47,7 +47,8 @@ public class WordReplaceTextInFormFields {
      * разкоментировать для тестирования как отдельного класса.
      */
 
-  /* разкоментировать для тестирования как отдельного класса.
+  /*
+   разкоментировать для тестирования как отдельного класса.
   public static void main(String[] args) throws Exception {
 
         XWPFDocument document = new XWPFDocument(new FileInputStream("FilmPoisk.dotx"));
