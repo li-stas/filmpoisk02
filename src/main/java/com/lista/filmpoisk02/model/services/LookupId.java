@@ -21,6 +21,7 @@ public class LookupId {
     private static final String ERROR_STATUS = "error";
     private static final int CODE_SUCCESS = 100;
     private static final int AUTH_FAILURE = 102;
+    private static final int PAUSEBETWEENEACHCHECK = 10;
 
     public Page eval(String cSeekId, SpringBootConfiguration config,
                      SiteLookupService omDbApiLookupService) {
@@ -41,12 +42,21 @@ public class LookupId {
         Future<Page> result = omDbApiLookupService.findPage(cUrl01, config.getApikey(), cSeekId);
 
         try {
-
+            int timeOut = config.getTimeoutforsinglerequests() * 1000; // значение в секундах
             while (!result.isDone()) {
-                Thread.sleep(10); //millisecond pause between each check
+                Thread.sleep(PAUSEBETWEENEACHCHECK); //millisecond pause between each check
+                timeOut -= PAUSEBETWEENEACHCHECK;
+                if (timeOut <= 0) {
+                    break;
+                }
             }
-            log.info("  // запись в экзепляр класса");
-            oPage01 = result.get();
+            if (timeOut > 0) {
+                log.info("  // запись в экзепляр класса время чтения, с "
+                        + ((config.getTimeoutforsinglerequests() * 1000) - timeOut)/1000 );
+                oPage01 = result.get();
+            } else {
+                log.info("Время ожидания превышено Timeoutforsinglerequests, с" + config.getTimeoutforsinglerequests() );
+            }
 
         } catch (InterruptedException e) {
             log.error(e.getMessage() + " InterruptedException", e);
@@ -60,6 +70,7 @@ public class LookupId {
         } else {
             log.info("oPage01:" + oPage01);
         }
+
         oPage01.setStatus(oPage01.getStatus() + " " + cSeekId);
 
         return oPage01;
