@@ -16,11 +16,7 @@ public class Json2oPage {
         try {
             Map<String, Object> mapPage = mapper.readValue(cPage, new TypeReference<Map<String, Object>>() {
             });
-            oPage01.setImdbID((String) mapPage.get("imdbID"));
-            oPage01.setTitle((String) mapPage.get("Title"));
-            oPage01.setYear(Integer.parseInt((String) mapPage.get("Year")));
-            oPage01.setProduction((String) mapPage.get("Production"));
-            oPage01.setPoster((String) mapPage.get("Poster"));
+            Json2PageConverter.extractFromMapPage(mapPage, oPage01);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }

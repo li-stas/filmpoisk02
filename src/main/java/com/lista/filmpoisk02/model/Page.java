@@ -9,6 +9,10 @@ import java.util.Objects;
  * Класc POJO - для хранения получаемой инфрмации
  */
 public class Page {
+
+    private static final transient String ERROR_STATUS = "error";
+    private static final transient int AUTH_FAILURE = 102;
+
     private String imdbID;
     private String title;
     private int year;
@@ -20,20 +24,14 @@ public class Page {
     private String status;
     private int code;
 
+
+
     public Page() {
+        this.status = ERROR_STATUS;
+        this.code = AUTH_FAILURE;
     }
 
     public Page(String status, int code) {
-        this.status = status;
-        this.code = code;
-    }
-
-    public Page(String imdbID, String title, int year, String production, String poster, String status, int code) {
-        this.imdbID = imdbID;
-        this.title = title;
-        this.year = year;
-        this.production = production;
-        setPoster(poster);
         this.status = status;
         this.code = code;
     }

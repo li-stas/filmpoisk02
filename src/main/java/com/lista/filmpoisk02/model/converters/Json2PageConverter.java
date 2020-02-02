@@ -28,12 +28,20 @@ public class Json2PageConverter implements Converter<String, Page> {
         try {
             mapPage = mapper.readValue(cPage, new TypeReference<Map<String, Object>>() {
             });
-            return new Page((String) mapPage.get("imdbID"), (String) mapPage.get("Title")
-                    , Integer.parseInt((String) mapPage.get("Year")), (String) mapPage.get("Production")
-                    , (String) mapPage.get("Poster"), "", 0);
+            Page oPage01 = new Page();
+            extractFromMapPage(mapPage, oPage01);
+            return oPage01;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    static void extractFromMapPage(Map<String, Object> mapPage, Page oPage01) {
+        oPage01.setImdbID((String) mapPage.get("imdbID"));
+        oPage01.setTitle((String) mapPage.get("Title"));
+        oPage01.setYear(Integer.parseInt((String) mapPage.get("Year")));
+        oPage01.setProduction((String) mapPage.get("Production"));
+        oPage01.setPoster((String) mapPage.get("Poster"));
     }
 }
