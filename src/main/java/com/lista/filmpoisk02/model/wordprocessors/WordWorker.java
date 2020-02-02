@@ -53,11 +53,7 @@ public class WordWorker {
                     new XWPFParagraph[]{footerParagraph}
             );
 
-            createParagraph(docxModel).setText("Title:" + oPage.getTitle());
-            createParagraph(docxModel).setText("imdbID:" + oPage.getImdbID());
-            createParagraph(docxModel).setText("year:" + oPage.getYear());
-            createParagraph(docxModel).setText("production:" + oPage.getProduction());
-            createParagraph(docxModel).setText("poster:" + oPage.getPoster());
+            WordAddField(docxModel, oPage);
 
             // вывод изображения
             new WordAddImgFile().eval(docxModel, oPage);
@@ -75,6 +71,14 @@ public class WordWorker {
             log.error(e.getMessage(), e);
         }
         return cPathAndFileDocx;
+    }
+
+    private void WordAddField(XWPFDocument docxModel, Page oPage) {
+        createParagraph(docxModel).setText("Title:" + oPage.getTitle());
+        createParagraph(docxModel).setText("imdbID:" + oPage.getImdbID());
+        createParagraph(docxModel).setText("year:" + oPage.getYear());
+        createParagraph(docxModel).setText("production:" + oPage.getProduction());
+        createParagraph(docxModel).setText("poster:" + oPage.getPoster());
     }
 
     private static CTP createFooterModel(String footerContent) {
