@@ -1,6 +1,7 @@
 package com.lista.filmpoisk02.model.services;
 
 
+import com.lista.filmpoisk02.model.Debug;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.converters.Json2Page;
 import com.lista.filmpoisk02.model.converters.Json2oPage;
@@ -55,7 +56,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         String url = null;
         String cPage = "Error\":";
 
-        if (cUrlKey.isEmpty()) {
+        if (Debug.TRUE ) { //cUrlKey.isEmpty()
             // начальный ЮРЛ mainUrl - подстановка чз Map<String, String>
             url = "http://{mainUrl}/";
 
@@ -79,7 +80,6 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         }
 
         cPage = restTemplate.getForObject(url, String.class);
-
         Page oPage01 = getPage(cPage);
 
         return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса
@@ -87,18 +87,19 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
 
     private Page getPage(String cPage) {
         Page oPage01;
+
         if (cPage.contains("Error\":")) {
             oPage01 = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);
         } else {
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
-            if (false) {
+
+            if (Debug.FALSE) {
                 log.info("Call String -> oPage");
                 oPage01 = new Json2oPage().eval(cPage, oPage01);
             } else {
                 log.info("Call conversionService");
                 oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
             }
-
         }
         return oPage01;
     }
