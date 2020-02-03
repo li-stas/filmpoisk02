@@ -1,7 +1,6 @@
 package com.lista.filmpoisk02.model.services;
 
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
-import com.lista.filmpoisk02.model.Debug;
 import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +27,8 @@ public class LookupId {
                      SiteLookupService omDbApiLookupService) {
         String cUrl01;
         Page oPage01 = getNewPage();
-
-        cUrl01 = get_cUrl01(cSeekId, config);
-
-        Future<Page> result = omDbApiLookupService.findPage(cUrl01, config.getApikey(), cSeekId);
+        String cUrlTypeSeek = "i"; // ID - фильма
+        Future<Page> result = omDbApiLookupService.findPage(cUrlTypeSeek, config.getApikey(), cSeekId);
 
         try {
             int timeOut = waitIsDone(result, config);
@@ -79,23 +76,6 @@ public class LookupId {
         }
 
         oPage01.setStatus(oPage01.getStatus() + " " + cSeekId);
-    }
-
-    private String get_cUrl01(String cSeekId, SpringBootConfiguration config) {
-        String cUrl01;
-        if (Debug.FALSE) {
-            log.info("--> " + "/filmpoisk-id");
-            log.info("  config.getApikey()=" + config.getApikey());
-
-            cUrl01 = new StringBuilder().append("?apikey=").append(config.getApikey()).
-                    append("&i=").append(cSeekId).toString();
-
-            log.info("cUrl01=" + cUrl01);
-            log.info("  // чтение из сайта cUrl01");
-        } else {
-             cUrl01 = "";
-        }
-        return cUrl01;
     }
 
 }

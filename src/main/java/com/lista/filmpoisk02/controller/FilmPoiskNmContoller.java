@@ -35,7 +35,6 @@ public class FilmPoiskNmContoller implements Queryinterface {
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
-
     @Autowired
     public FilmPoiskNmContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService) {
         this.config = config;
@@ -59,10 +58,9 @@ public class FilmPoiskNmContoller implements Queryinterface {
             log.info("  // постановка всех задач в поток");
             Future<Page>[] thr = getFutures(aName, nLen_aUrl);
 
-            log.info("  // Подождите, пока они все не сделали // Wait until they are all done");
+            log.info("  // Подождите, пока они все не сделают // Wait until they are all done");
             waitingIsDone(thr, nLen_aUrl);
 
-            log.info("  // Print results, including elapsed time");
             log.info("  Elapsed time: " + (System.currentTimeMillis() - start));
             printResult(thr, nLen_aUrl);
 
@@ -97,7 +95,6 @@ public class FilmPoiskNmContoller implements Queryinterface {
                 break;
             } else {
                 try {
-                    //log.info("  //10 millisecond pause between each check");
                     Thread.sleep(10); //millisecond pause between each check
                 } catch (InterruptedException e) {
                     log.error(e.getMessage() + " " + "//millisecond pause between each check", e);
@@ -110,10 +107,9 @@ public class FilmPoiskNmContoller implements Queryinterface {
     private Future<Page>[] getFutures(String[] aName, int nLen_aUrl) {
         Future<Page>[] thr = new Future[nLen_aUrl];
         for (int i = 0; i < nLen_aUrl; i++) {
-
-            String cUrl01 = "?apikey=" + config.getApikey() + "&t=" + aName[i];
-            log.info(String.format("i=%d,aName[i]=%s,cUrl01=%s", i, aName[i], cUrl01));
-            thr[i] = omDbApiLookupService.findPage(cUrl01, config.getApikey(), cUrl01);
+            String cUrlParam = "t";
+            String cSeekKey = aName[i];
+            thr[i] = omDbApiLookupService.findPage(cUrlParam, config.getApikey(), cSeekKey);
         }
         return thr;
     }

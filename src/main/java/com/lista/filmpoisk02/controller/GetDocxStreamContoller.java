@@ -33,7 +33,6 @@ public class GetDocxStreamContoller {
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
     private final GetDocxStream getDocxStream;
-
     @Autowired
     public GetDocxStreamContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService,
                                   GetDocxStream getDocxStream) {

@@ -42,42 +42,31 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     }
 
     /**
-     *  cUrlKey = "" - построение запроса будет выполнено с использованием
-     *  UriComponentsBuilder из параметров String cApiKey, String cSeekId
-     * @param cUrlKey
+     * cUrlKey = "" - построение запроса будет выполнено с использованием
+     * UriComponentsBuilder из параметров String cApiKey, String cSeekId
+     *
      * @param cApiKey
      * @param cSeekId
      * @return
      */
     @Async //будет запущен в отдельном потоке
-    public Future<Page> findPage(String cUrlKey, String cApiKey, String cSeekId)  {
-
-        cUrlKey = ""; // режим builder.buildAndExpand
+    public Future<Page> findPage(String cUrlTypeSeek, String cApiKey, String cSeekId) {
         String url = null;
         String cPage = "Error\":";
 
-        if (Debug.TRUE ) { //cUrlKey.isEmpty()
-            // начальный ЮРЛ mainUrl - подстановка чз Map<String, String>
-            url = "http://{mainUrl}/";
+        // начальный ЮРЛ mainUrl - подстановка чз Map<String, String>
+        url = "http://{mainUrl}/";
+        // URI (URL) parameters
+        Map<String, String> urlParams = new HashMap<String, String>();
+        urlParams.put("mainUrl", "www.omdbapi.com");
+        // Query parameters
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
+                // Add query parameter
+                .queryParam("apikey", cApiKey)
+                .queryParam(cUrlTypeSeek, cSeekId);
 
-            // URI (URL) parameters
-            Map<String, String> urlParams = new HashMap<String, String>();
-            urlParams.put("mainUrl", "www.omdbapi.com");
-
-            // Query parameters
-            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(url)
-                    // Add query parameter
-                    .queryParam("apikey", cApiKey)
-                    .queryParam("i", cSeekId);
-
-            log.info("  Looking up URL" + builder.buildAndExpand(urlParams).toUri());
-
-            url = builder.buildAndExpand(urlParams).toUri().toString();
-
-        } else {
-            log.info("  Looking up " + cUrlKey);
-            url = String.format("http://www.omdbapi.com/%s", cUrlKey);
-        }
+        url = builder.buildAndExpand(urlParams).toUri().toString();
+        log.info("  Looking up URL" + builder.buildAndExpand(urlParams).toUri());
 
         cPage = restTemplate.getForObject(url, String.class);
         Page oPage01 = getPage(cPage);

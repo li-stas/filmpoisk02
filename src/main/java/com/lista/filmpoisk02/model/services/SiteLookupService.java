@@ -6,5 +6,5 @@ import java.util.concurrent.Future;
 
 public interface SiteLookupService {
 
-    public Future<Page> findPage(String cUrl01, String apikey, String cSeekKey);
+    public Future<Page> findPage(String cUrlTypeSeek, String apikey, String cSeekKey);
 }

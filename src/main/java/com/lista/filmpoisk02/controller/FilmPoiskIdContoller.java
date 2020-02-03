@@ -32,7 +32,6 @@ public class FilmPoiskIdContoller implements Queryinterface {
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
-
     @Autowired
     public FilmPoiskIdContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService) {
         this.config = config;
