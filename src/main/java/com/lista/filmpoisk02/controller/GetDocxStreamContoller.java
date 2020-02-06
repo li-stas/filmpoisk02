@@ -41,7 +41,7 @@ public class GetDocxStreamContoller {
         this.getDocxStream = getDocxStream;
     }
 
-    @RequestMapping("/getdocx02")
+    @RequestMapping("/getdocx")
     public ResponseEntity<InputStreamResource> querying(
             @RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
 
@@ -52,7 +52,6 @@ public class GetDocxStreamContoller {
         Page oPage = new LookupId().eval(cSeekId, config, omDbApiLookupService);
 
         log.info("oPage:" + oPage);
-
 
         // замены в шаблоне c сохранением в файл
         docx = new WordRepl().getXWPFDocument(oPage, "FilmPoisk.docx");

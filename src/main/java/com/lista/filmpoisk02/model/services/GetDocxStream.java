@@ -28,14 +28,16 @@ public class GetDocxStream {
     private static final String DIRECTORY = ".";
 
     private final ServletContext servletContext;
+    private final MediaTypeUtils mediaTypeUtils;
     @Autowired
-    public GetDocxStream(ServletContext servletContext) {
+    public GetDocxStream(ServletContext servletContext, MediaTypeUtils mediaTypeUtils) {
         this.servletContext = servletContext;
+        this.mediaTypeUtils = mediaTypeUtils;
     }
 
     public ResponseEntity<InputStreamResource> download(XWPFDocument docx, String fileName) throws IOException {
 
-        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
+        MediaType mediaType = mediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName);
         log.info("fileName: " + fileName);
         log.info("mediaType: " + mediaType);
 

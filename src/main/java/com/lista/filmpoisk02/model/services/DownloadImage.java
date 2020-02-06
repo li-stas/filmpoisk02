@@ -1,14 +1,15 @@
-package com.lista.filmpoisk02.model.converters;
+package com.lista.filmpoisk02.model.services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+@Service
 public class DownloadImage {
     private static final Logger log = LoggerFactory.getLogger(DownloadImage.class);
 

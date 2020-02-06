@@ -25,7 +25,7 @@ public class LookupId {
 
     public Page eval(String cSeekId, SpringBootConfiguration config,
                      SiteLookupService omDbApiLookupService) {
-        String cUrl01;
+
         Page oPage01 = getNewPage();
         String cUrlTypeSeek = "i"; // ID - фильма
         Future<Page> result = omDbApiLookupService.findPage(cUrlTypeSeek, config.getApikey(), cSeekId);

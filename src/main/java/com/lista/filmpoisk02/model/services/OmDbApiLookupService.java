@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -33,10 +34,12 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     private final ConversionService conversionService;
     // вариант инициализаци без конструктора private RestTemplate restTemplate = new RestTemplate();
     private final RestTemplate restTemplate;
+    private final DownloadImage downloadImage;
 
-    public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService) {
+    public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService, DownloadImage downloadImage) {
         this.restTemplate = restTemplateBuilder.build();
         this.conversionService = conversionService;
+        this.downloadImage = downloadImage;
     }
 
     /**
@@ -81,6 +84,12 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
             log.info("Call conversionService");
             oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
+            // получение стрима картики
+            if (oPage01.getPosterImg() != null) {
+                InputStream streamImg = downloadImage.getStreamImg(oPage01.getPoster());
+                downloadImage.saveTofile(oPage01.getPoster(), oPage01.getPosterImg());
+                oPage01.setStreamImg(streamImg);
+            }
         }
         return oPage01;
     }

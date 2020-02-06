@@ -20,7 +20,6 @@ import java.util.Map;
 
 public class Json2PageConverter implements Converter<String, Page> {
     private static final Logger log = LoggerFactory.getLogger(Json2PageConverter.class);
-
     @Override
     public Page convert(String cPage) {
         ObjectMapper mapper = new ObjectMapper();
@@ -29,7 +28,11 @@ public class Json2PageConverter implements Converter<String, Page> {
             mapPage = mapper.readValue(cPage, new TypeReference<Map<String, Object>>() {
             });
             Page oPage01 = new Page();
-            extractFromMapPage(mapPage, oPage01);
+            oPage01.setImdbID((String) mapPage.get("imdbID"));
+            oPage01.setTitle((String) mapPage.get("Title"));
+            oPage01.setYear(Integer.parseInt((String) mapPage.get("Year")));
+            oPage01.setProduction((String) mapPage.get("Production"));
+            oPage01.setPoster((String) mapPage.get("Poster"));
             return oPage01;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -37,11 +40,4 @@ public class Json2PageConverter implements Converter<String, Page> {
         return null;
     }
 
-    static void extractFromMapPage(Map<String, Object> mapPage, Page oPage01) {
-        oPage01.setImdbID((String) mapPage.get("imdbID"));
-        oPage01.setTitle((String) mapPage.get("Title"));
-        oPage01.setYear(Integer.parseInt((String) mapPage.get("Year")));
-        oPage01.setProduction((String) mapPage.get("Production"));
-        oPage01.setPoster((String) mapPage.get("Poster"));
-    }
 }
