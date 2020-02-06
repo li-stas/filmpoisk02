@@ -75,7 +75,6 @@ public class LookupId {
         } else {
             log.info("oPage01:" + oPage01);
         }
-
         oPage01.setStatus(oPage01.getStatus() + " " + cSeekId);
     }
 

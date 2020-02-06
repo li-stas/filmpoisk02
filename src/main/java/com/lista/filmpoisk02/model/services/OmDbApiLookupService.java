@@ -2,7 +2,6 @@ package com.lista.filmpoisk02.model.services;
 
 
 import com.lista.filmpoisk02.model.Page;
-import com.lista.filmpoisk02.model.converters.Json2Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -30,11 +29,10 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     private static final int CODE_SUCCESS = 100;
     private static final int AUTH_FAILURE = 102;
 
-    //@Autowired
-    private final ConversionService conversionService;
     // вариант инициализаци без конструктора private RestTemplate restTemplate = new RestTemplate();
     private final RestTemplate restTemplate;
     private final DownloadImage downloadImage;
+    private final ConversionService conversionService;
 
     public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService, DownloadImage downloadImage) {
         this.restTemplate = restTemplateBuilder.build();
@@ -46,8 +44,8 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
      * cUrlKey = "" - построение запроса будет выполнено с использованием
      * UriComponentsBuilder из параметров String cApiKey, String cSeekId
      *
-     * @param cApiKey
-     * @param cSeekId
+     * @param cApiKey -
+     * @param cSeekId -
      * @return
      */
     @Async //будет запущен в отдельном потоке
@@ -70,28 +68,28 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
         log.info("  Looking up URL" + builder.buildAndExpand(urlParams).toUri());
 
         cPage = restTemplate.getForObject(url, String.class);
-        Page oPage01 = getPage(cPage);
+        Page oPage = getPage(cPage);
 
-        return new AsyncResult<Page>(oPage01);  //AsyncResult требование любого асинхронного сервиса
+        return new AsyncResult<Page>(oPage);  //AsyncResult требование любого асинхронного сервиса
     }
 
     private Page getPage(String cPage) {
-        Page oPage01;
-
-        if (cPage.contains("Error\":")) {
-            oPage01 = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);
-        } else {
-            oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
+        Page oPage = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);
+        if (!(cPage.contains("Error\":"))) {
             log.info("Call conversionService");
-            oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
-            // получение стрима картики
-            if (oPage01.getPosterImg() != null) {
-                InputStream streamImg = downloadImage.getStreamImg(oPage01.getPoster());
-                downloadImage.saveTofile(oPage01.getPoster(), oPage01.getPosterImg());
-                oPage01.setStreamImg(streamImg);
+            oPage = conversionService.convert(cPage, Page.class);
+            if (oPage != null) {
+                oPage.setStatus(SUCCESS_STATUS);
+                oPage.setCode(CODE_SUCCESS);
+                // получение стрима картики
+                if (oPage.getPosterImg() != null) {
+                    InputStream streamImg = downloadImage.getStreamImg(oPage.getPoster());
+                    downloadImage.saveTofile(oPage.getPoster(), oPage.getPosterImg());
+                    oPage.setStreamImg(streamImg);
+                }
             }
         }
-        return oPage01;
+        return oPage;
     }
 
 }
