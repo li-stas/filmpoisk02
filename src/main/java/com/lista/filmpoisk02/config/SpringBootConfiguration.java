@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringBootConfiguration {
     private String apikey = "######";
-    private int timeoutforsinglerequests = 1;
+    private int timeOutForSingleRequests = 1;
 
-    public int getTimeoutforsinglerequests() {
-        return timeoutforsinglerequests;
+    public int getTimeOutForSingleRequests() {
+        return timeOutForSingleRequests;
     }
 
-    public void setTimeoutforsinglerequests(int timeoutforsinglerequests) {
-        this.timeoutforsinglerequests = timeoutforsinglerequests;
+    public void setTimeOutForSingleRequests(int timeOutForSingleRequests) {
+        this.timeOutForSingleRequests = timeOutForSingleRequests;
     }
 
     public String getApikey() { return apikey; }
