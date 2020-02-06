@@ -19,7 +19,7 @@ import java.util.Map;
  */
 
 public class Json2PageConverter implements Converter<String, Page> {
-    private static final Logger log = LoggerFactory.getLogger(Json2oPage.class);
+    private static final Logger log = LoggerFactory.getLogger(Json2PageConverter.class);
 
     @Override
     public Page convert(String cPage) {

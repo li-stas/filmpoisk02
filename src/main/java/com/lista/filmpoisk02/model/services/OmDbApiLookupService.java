@@ -1,10 +1,8 @@
 package com.lista.filmpoisk02.model.services;
 
 
-import com.lista.filmpoisk02.model.Debug;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.converters.Json2Page;
-import com.lista.filmpoisk02.model.converters.Json2oPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -81,14 +79,8 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
             oPage01 = new Page(ERROR_STATUS + " " + cPage, AUTH_FAILURE);
         } else {
             oPage01 = new Page(SUCCESS_STATUS, CODE_SUCCESS);
-
-            if (Debug.FALSE) {
-                log.info("Call String -> oPage");
-                oPage01 = new Json2oPage().eval(cPage, oPage01);
-            } else {
-                log.info("Call conversionService");
-                oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
-            }
+            log.info("Call conversionService");
+            oPage01 = new Json2Page().eval(cPage, oPage01, conversionService);
         }
         return oPage01;
     }
