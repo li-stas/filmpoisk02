@@ -33,12 +33,14 @@ public class GetDocxStreamContoller {
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
     private final GetDocxStream getDocxStream;
+    private final LookupId lookupId;
     @Autowired
     public GetDocxStreamContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService,
-                                  GetDocxStream getDocxStream) {
+                                  GetDocxStream getDocxStream, LookupId lookupId) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;
         this.getDocxStream = getDocxStream;
+        this.lookupId = lookupId;
     }
 
     @RequestMapping("/getdocx")
@@ -49,8 +51,7 @@ public class GetDocxStreamContoller {
         XWPFDocument docx;
         String cFile;
 
-        Page oPage = new LookupId().eval(cSeekId, config, omDbApiLookupService);
-
+        Page oPage = lookupId.eval(cSeekId, config, omDbApiLookupService);
         log.info("oPage:" + oPage);
 
         // замены в шаблоне c сохранением в файл

@@ -4,6 +4,7 @@ import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -14,7 +15,7 @@ import java.util.concurrent.Future;
  * входные данные: ключевое слово поиска
  * возварат: объекта Страница с данными
  */
-
+@Service
 public class LookupId {
     private static final Logger log = LoggerFactory.getLogger(LookupId.class);
     private static final String SUCCESS_STATUS = "success";
