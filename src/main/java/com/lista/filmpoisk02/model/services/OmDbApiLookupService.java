@@ -34,7 +34,8 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
     private final DownloadImage downloadImage;
     private final ConversionService conversionService;
 
-    public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService, DownloadImage downloadImage) {
+    public OmDbApiLookupService(RestTemplateBuilder restTemplateBuilder, ConversionService conversionService,
+                                DownloadImage downloadImage) {
         this.restTemplate = restTemplateBuilder.build();
         this.conversionService = conversionService;
         this.downloadImage = downloadImage;

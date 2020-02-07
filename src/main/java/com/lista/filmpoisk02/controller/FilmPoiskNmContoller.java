@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @EnableAsync
-public class FilmPoiskNmContoller implements Queryinterface {
+public class FilmPoiskNmContoller implements QueryinterfaceString {
     private static final Logger log = LoggerFactory.getLogger(FilmPoiskNmContoller.class);
 
     private static final String template = "FilmPoiskNm, %s";
@@ -78,7 +78,6 @@ public class FilmPoiskNmContoller implements Queryinterface {
                 log.info("  --> " + thr[i].get());
             } catch (InterruptedException e) {
                 log.error(e.getMessage() + " InterruptedException", e);
-
             } catch (ExecutionException e) {
                 log.error(e.getMessage() + "ExecutionException", e);
             }

@@ -6,6 +6,7 @@ import com.lista.filmpoisk02.model.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
@@ -17,7 +18,7 @@ import java.util.Map;
  * package com.lista.filmpoisk02.config;
  * WebConfig
  */
-
+@Component
 public class Json2PageConverter implements Converter<String, Page> {
     private static final Logger log = LoggerFactory.getLogger(Json2PageConverter.class);
     @Override

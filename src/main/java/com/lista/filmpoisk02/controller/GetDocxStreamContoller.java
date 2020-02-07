@@ -4,7 +4,7 @@ package com.lista.filmpoisk02.controller;
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.services.GetDocxStream;
-import com.lista.filmpoisk02.model.services.LookupId;
+import com.lista.filmpoisk02.model.services.LookupIdImp;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
 import com.lista.filmpoisk02.model.wordprocessors.WordRepl;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -27,16 +27,16 @@ import java.io.IOException;
 
 @RestController
 @EnableAsync
-public class GetDocxStreamContoller {
+public class GetDocxStreamContoller implements QueryInterfaceRespEntity  {
     private static final Logger log = LoggerFactory.getLogger(GetDocxStreamContoller.class);
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
     private final GetDocxStream getDocxStream;
-    private final LookupId lookupId;
+    private final LookupIdImp lookupId;
     @Autowired
     public GetDocxStreamContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService,
-                                  GetDocxStream getDocxStream, LookupId lookupId) {
+                                  GetDocxStream getDocxStream, LookupIdImp lookupId) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;
         this.getDocxStream = getDocxStream;
