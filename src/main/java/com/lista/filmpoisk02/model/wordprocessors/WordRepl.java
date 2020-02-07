@@ -13,7 +13,8 @@ import java.io.IOException;
 public class WordRepl {
     private static final Logger log = LoggerFactory.getLogger(WordRepl.class);
 
-    public String saveToFile(Page oPage, String cPathAndFileDotx, String cFile) {
+    public String saveToFile(Page oPage, String cPathAndFileDotx, String cFileParam) {
+        String cFile = cFileParam;
         if (cFile.isEmpty()) {
             cFile = new StringBuilder().append(oPage.getTitle()).append("(").append(oPage.getImdbID())
                     .append(")").append(".docx").toString();
@@ -38,11 +39,11 @@ public class WordRepl {
         XWPFDocument document = null;
         try {
             document = new XWPFDocument(new FileInputStream(cPathAndFileDotx));
-            WordReplaceTextInFormFields.replaceFormFieldText(document, "title", oPage.getTitle());
-            WordReplaceTextInFormFields.replaceFormFieldText(document, "imdbID", oPage.getImdbID());
-            WordReplaceTextInFormFields.replaceFormFieldText(document, "year", String.format("%d",oPage.getYear()));
-            WordReplaceTextInFormFields.replaceFormFieldText(document, "production", oPage.getProduction());
-            WordReplaceTextInFormFields.replaceFormFieldText(document, "poster", oPage.getPoster());
+            WordReplaceTextInFormFields.replace(document, "title", oPage.getTitle());
+            WordReplaceTextInFormFields.replace(document, "imdbID", oPage.getImdbID());
+            WordReplaceTextInFormFields.replace(document, "year", String.format("%d",oPage.getYear()));
+            WordReplaceTextInFormFields.replace(document, "production", oPage.getProduction());
+            WordReplaceTextInFormFields.replace(document, "poster", oPage.getPoster());
 
             new WordAddImgFile().eval(document, oPage);
 

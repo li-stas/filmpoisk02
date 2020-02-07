@@ -69,13 +69,15 @@ public class LookupIdImp implements LookupId{
     }
 
     private void checkStatusPage(String cSeekId, Page oPage01) {
+        String cStatus = cSeekId;
         if (oPage01.getCode() == 102) {
-            cSeekId = "  Ошибвка поиска ID=" + cSeekId;
-            log.info(cSeekId + "  cPage:" + oPage01.getStatus());
+            cStatus = "  Ошибвка поиска ID=" + cSeekId;
+            log.info(cStatus + "  cPage:" + oPage01.getStatus());
         } else {
             log.info("oPage01:" + oPage01);
         }
-        oPage01.setStatus(oPage01.getStatus() + " " + cSeekId);
+        oPage01.setStatus(oPage01.getStatus() + " " + cStatus);
     }
+
 
 }

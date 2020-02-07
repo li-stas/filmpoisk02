@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class WordReplaceTextInFormFields {
 
-   public static void replaceFormFieldText(XWPFDocument document, String ffname, String text) {
+   public static void replace(XWPFDocument document, String ffname, String text) {
         boolean foundformfield = false;
         for (XWPFParagraph paragraph : document.getParagraphs()) {
             for (XWPFRun run : paragraph.getRuns()) {
