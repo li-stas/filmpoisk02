@@ -3,7 +3,7 @@ package com.lista.filmpoisk02.controller;
 import com.lista.filmpoisk02.config.SpringBootConfiguration;
 import com.lista.filmpoisk02.model.Page;
 import com.lista.filmpoisk02.model.Querying;
-import com.lista.filmpoisk02.model.services.LookupIdImp;
+import com.lista.filmpoisk02.model.services.LookupId;
 import com.lista.filmpoisk02.model.services.SiteLookupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,19 +32,19 @@ public class FilmPoiskIdContoller implements QueryinterfaceString {
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final SiteLookupService omDbApiLookupService;
-    private final LookupIdImp lookupIdImp;
+    private final LookupId lookupId;
     @Autowired
-    public FilmPoiskIdContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService, LookupIdImp lookupIdImp) {
+    public FilmPoiskIdContoller(SpringBootConfiguration config, SiteLookupService omDbApiLookupService, LookupId lookupId) {
         this.config = config;
         this.omDbApiLookupService = omDbApiLookupService;
-        this.lookupIdImp = lookupIdImp;
+        this.lookupId = lookupId;
     }
 
     @RequestMapping(value = "/filmpoisk-id",   method = RequestMethod.GET,
             produces = { "application/json", "application/xml" })
     public Querying querying(@RequestParam(value = "id", required = false, defaultValue = "tt0119654") String cSeekId) {
 
-        Page oPage01 = lookupIdImp.eval(cSeekId, config, omDbApiLookupService);
+        Page oPage01 = lookupId.eval(cSeekId, config, omDbApiLookupService);
         cSeekId = oPage01.getStatus();
         log.info("oPage01:" + oPage01);
 
