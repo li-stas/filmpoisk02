@@ -28,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
      * 3. @XmlRootElement !!!
      * public class Querying {
      *
-     * @param configurer
+     * @param configurer -
      */
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {

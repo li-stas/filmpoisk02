@@ -47,11 +47,11 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
      *
      * @param cApiKey -
      * @param cSeekId -
-     * @return
+     * @return -
      */
     @Async //будет запущен в отдельном потоке
     public Future<Page> findPage(String cUrlTypeSeek, String cApiKey, String cSeekId) {
-        String url = null;
+        String url;
         String cPage = "Error\":";
 
         // начальный ЮРЛ mainUrl - подстановка чз Map<String, String>

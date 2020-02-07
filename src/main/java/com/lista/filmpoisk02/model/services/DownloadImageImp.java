@@ -26,8 +26,8 @@ public class DownloadImageImp implements DownloadImage {
     }
     /**
      * получени стрима для картики
-     * @param cUrl
-     * @return
+     * @param cUrl -
+     * @return in
      */
     public InputStream getStreamImg(String cUrl){
         InputStream in = null;
