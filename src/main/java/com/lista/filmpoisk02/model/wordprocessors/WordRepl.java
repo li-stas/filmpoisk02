@@ -34,7 +34,7 @@ public class WordRepl {
     }
 
     public XWPFDocument getXWPFDocument(Page oPage, String cPathAndFileDotx)  {
-        WordReplaceTextInFormFields wrtiff =  new WordReplaceTextInFormFields();
+        //WordReplaceTextInFormFields wrtiff =  new WordReplaceTextInFormFields();
         XWPFDocument document = null;
         try {
             document = new XWPFDocument(new FileInputStream(cPathAndFileDotx));
