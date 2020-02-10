@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @EnableAsync
-public class FilmPoiskNmContoller implements QueryinterfaceString {
+public class FilmPoiskNmContoller  {
     private static final Logger log = LoggerFactory.getLogger(FilmPoiskNmContoller.class);
 
     private static final String template = "FilmPoiskNm, %s";

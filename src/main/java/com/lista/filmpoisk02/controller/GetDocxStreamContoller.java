@@ -27,7 +27,7 @@ import java.io.IOException;
 
 @RestController
 @EnableAsync
-public class GetDocxStreamContoller implements QueryInterfaceRespEntity  {
+public class GetDocxStreamContoller {
     private static final Logger log = LoggerFactory.getLogger(GetDocxStreamContoller.class);
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
