@@ -44,7 +44,7 @@ public class FilmPoiskNmContoller  {
     @RequestMapping("/filmpoisk-nm")
     public Querying querying(@RequestParam(value = "name", required = false, defaultValue = "batman") String cName) {
 
-        log.info("config.getApikey()=" + config.getApikey());
+        log.debug("config.getApikey()=" + config.getApikey());
         log.info("--> " + "/filmpoisk-nm " + cName);
 
         // разбор строки пареметра

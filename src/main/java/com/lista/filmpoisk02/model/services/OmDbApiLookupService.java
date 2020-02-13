@@ -66,7 +66,7 @@ public class OmDbApiLookupService implements SiteLookupService { //implements Si
                 .queryParam(cUrlTypeSeek, cSeekId);
 
         url = builder.buildAndExpand(urlParams).toUri().toString();
-        log.info("  Looking up URL" + builder.buildAndExpand(urlParams).toUri());
+        log.info("  Looking up URL" +  url.replace("a625f1bf","ffffffff"));
 
         cPage = restTemplate.getForObject(url, String.class);
         Page oPage = getPage(cPage);
