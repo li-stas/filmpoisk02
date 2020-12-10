@@ -112,14 +112,14 @@ public class Page {
 
     @Override
     public String toString() {
-        return new StringBuilder().append("Page{")
-                .append("imdbID='").append(imdbID).append('\'')
-                .append(", title='").append(title).append('\'')
-                .append(", year=").append(year).append(", production='").append(production).append('\'')
-                .append(", poster='").append(poster).append('\'')
-                .append(", posterImg='").append(posterImg).append('\'')
-                .append(", status='").append(status).append('\'')
-                .append(", code=").append(code).append('}').toString();
+        return "Page{" +
+                "imdbID='" + imdbID + '\'' +
+                ", title='" + title + '\'' +
+                ", year=" + year + ", production='" + production + '\'' +
+                ", poster='" + poster + '\'' +
+                ", posterImg='" + posterImg + '\'' +
+                ", status='" + status + '\'' +
+                ", code=" + code + '}';
     }
 
     @Override
