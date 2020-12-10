@@ -56,8 +56,7 @@ public class GetDocxStreamContoller {
 
         // замены в шаблоне c сохранением в файл
         docx = new WordRepl().getXWPFDocument(oPage, "FilmPoisk.docx");
-        cFile = new StringBuilder().append(oPage.getTitle()).append("(").append(oPage.getImdbID())
-                .append(")").append(".docx").toString();
+        cFile = oPage.getTitle() + "(" + oPage.getImdbID() + ")" + ".docx";
         try {
             ret = getDocxStream.download(docx, cFile);
         } catch (IOException e) {
