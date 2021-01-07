@@ -1,6 +1,5 @@
 package com.lista.avgcursbank.config;
 
-import com.lista.filmpoisk.model.converters.Json2PageConverter;
 import com.lista.avgcursbank.model.converters.Json2Trade03Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +13,13 @@ import org.springframework.web.servlet.config.annotation.*;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
     private static final Logger log = LoggerFactory.getLogger(WebConfig.class);
+
+    /**
+     * конвертор данных
+     * @param registry
+     */
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new Json2PageConverter());
         registry.addConverter(new Json2Trade03Converter());
 
     }
@@ -39,11 +42,9 @@ public class WebConfig implements WebMvcConfigurer {
     /**
      * https://www.javainuse.com/spring/spring-boot-content-negotiation
      * 1. это добавлено
-     * 2. class FilmPoiskIdContoller @RequestMapping(val ...
-     * ответ констуируется чз set-теры
+     * 2. class  @RequestMapping(val ... ответ констуируется чз set-теры
      * 3. @XmlRootElement !!!
-     * public class Querying {
-     *
+     * public class Querying {     *
      * @param configurer -
      */
     @Override

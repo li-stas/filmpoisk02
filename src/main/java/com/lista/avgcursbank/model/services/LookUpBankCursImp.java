@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+/**
+ * сервис преварительной подготовки для получения данных чз API
+ * Future<Trades> result подготавливаню в этом класск для возможной
+ * реалицции многопоточных запросов
+ */
 @Service
 public class LookUpBankCursImp implements LookUpBankCurs {
     private static final Logger log = LoggerFactory.getLogger(LookUpBankCursImp.class);
@@ -26,9 +31,9 @@ public class LookUpBankCursImp implements LookUpBankCurs {
 
     public Trades eval(int nId_Bank, String cUrl, SpringBootConfiguration config) {
         Trades oTrade01 = getNewTrade();
-        String cUrlTypeSeek = ""; // тип поиск i
-        String cSeekId = ""; // ID - фильма
-        String cApiKey = ""; // config.getApikey()
+        String cUrlTypeSeek = "";
+        String cSeekId = "";
+        String cApiKey = "";
         Future<Trades> result = bankLookupService.findPage(nId_Bank, cUrl, cUrlTypeSeek, cApiKey, cSeekId);
         try {
             int timeOut = waitIsDone(result, config);

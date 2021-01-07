@@ -5,7 +5,6 @@ import com.lista.avgcursbank.model.Trades;
 import com.lista.avgcursbank.model.converters.Json2Trade01Converter;
 import com.lista.avgcursbank.model.converters.Json2Trade02Converter;
 import com.lista.avgcursbank.model.converters.Json2Trade03Converter;
-import com.lista.filmpoisk.model.services.OmDbApiLookupService;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -35,7 +34,7 @@ import java.util.concurrent.Future;
  */
 @Service //делая его кандидатом для сканирования компонентов в Spring для обнаружения и помещения его в
 public class BankLookupServiceImp implements BankLookupService { //implements SiteLookupService
-    private static final Logger log = LoggerFactory.getLogger(OmDbApiLookupService.class);
+    private static final Logger log = LoggerFactory.getLogger(BankLookupServiceImp.class);
 
     private static final String SUCCESS_STATUS = "success";
     private static final String ERROR_STATUS = "error";
@@ -60,9 +59,7 @@ public class BankLookupServiceImp implements BankLookupService { //implements Si
     }
 
     /**
-     * cUrlKey = "" - построение запроса будет выполнено с использованием
-     * UriComponentsBuilder из параметров String cApiKey, String cSeekId
-     *
+     * получение данных чз API , конвертация ответа в рабочий класс
      * @param cApiKey -
      * @param cSeekId -
      * @return -

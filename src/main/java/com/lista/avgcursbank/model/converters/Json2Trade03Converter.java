@@ -14,12 +14,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 /**
- * https://www.baeldung.com/spring-type-conversions
- * Мы еще не закончили. Мы также должны сообщить Spring об этом новом конвертере, добавив
- * StringToEmployeeConverter в FormatterRegistry .
- * Это может быть сделано путем реализации WebMvcConfigurer  и переопределения метода addFormatters() :
- * package com.lista.filmpoisk02.config;
- * WebConfig
+ * Конвертация запроса от  Приват банка в рабочий класс Trades
  */
 @Component
 public class Json2Trade03Converter implements Converter<String, Trades> {

@@ -1,6 +1,5 @@
 package com.lista.avgcursbank.controller;
 
-import com.lista.avgcursbank.model.AO_trade;
 import com.lista.avgcursbank.model.Trades;
 import com.lista.avgcursbank.model.services.ScheduledTasksCron;
 import com.lista.avgcursbank.model.services.TradeAvgAll;
@@ -8,13 +7,11 @@ import com.lista.avgcursbank.model.services.TradeAvgPeriod;
 import com.lista.avgcursbank.repository.AO_tradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 // /tacbank/v1/tradeadd
 
@@ -37,22 +34,30 @@ public class TradeController {
         this.tradeAvgPeriod = tradeAvgPeriod;
     }
 
-    //TradeAvgPeriod
+    /**
+     * 2) Запрос на выдачу списка средних курсов по всем источникам за      * период
+     *
+     * @param cDt1 в формате ГГГГ-ММ-ДД
+     * @param cDt2 в формате ГГГГ-ММ-ДД
+     * @return
+     */
     // GET method
     @GetMapping("/tradavgperiod")
     public ResponseEntity<Trades> TradAvgPeriod(
-            @RequestParam(value="date1", required = false, defaultValue = "2021-01-06") String cDt1,
-            @RequestParam(value="date2", required = false, defaultValue = "2021-01-06") String cDt2
+            @RequestParam(value = "date1", required = false, defaultValue = "2021-01-06") String cDt1,
+            @RequestParam(value = "date2", required = false, defaultValue = "2021-01-06") String cDt2
     ) {
-        /*cDt1 = "2021-01-06";
-        cDt2 = "2021-01-06";*/
-
         Trades findAvgPeriod = null;
         findAvgPeriod = tradeAvgPeriod.eval(cDt1, cDt2);
 
         return ResponseEntity.ok().body(findAvgPeriod);
     }
 
+    /**
+     * 1) Запрос на список курсов по всем источникам, с величинами  средних курсов по рынку
+     *
+     * @return
+     */
     // GET method
     @GetMapping("/tradavgrate")
     public ResponseEntity<Trades> tradAvgRate() {
@@ -61,6 +66,11 @@ public class TradeController {
         return ResponseEntity.ok().body(findAvgRate);
     }
 
+    /**
+     * загрузк чз запрос данных за текущий день
+     *
+     * @return
+     */
     // GET method to create a phone
     @GetMapping("/tradeadd")
     public ResponseEntity<Trades> addTrade() {

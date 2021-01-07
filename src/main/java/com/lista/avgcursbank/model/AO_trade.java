@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
+
+/**
+ * класс ORM для обмена данными между приложение и БД
+ */
 @Entity
 @Table (name = "ao_trade")
 @EntityListeners(AuditingEntityListener.class)

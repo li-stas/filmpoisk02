@@ -5,6 +5,10 @@ import javax.persistence.Converter;
 import java.sql.Date;
 import java.time.LocalDate;
 
+/**
+ * https://thoughts-on-java.org/persist-localdate-localdatetime-jpa/
+ * https://thoughts-on-java.org/jpa-21-how-to-implement-type-converter/
+ */
 @Converter(autoApply = true)
 public class LocalDateAttributeConverter implements AttributeConverter<LocalDate, Date> {
 

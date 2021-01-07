@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * рабочий класс для обработки данных и обслуживание сервисов
+ */
 public class Trades {
     private static final transient String ERROR_STATUS = "error";
     private static final transient int AUTH_FAILURE = 102;
@@ -24,6 +27,11 @@ public class Trades {
         trades = new ArrayList<>();
     }
 
+    /**
+     *  приведение json ответа массиву отдельных json
+     * @param cTrade
+     * @return
+     */
     public String[] cTrade2aTrade(String cTrade) {
         cTrade = cTrade.replace("[","");
         cTrade = cTrade.replace("]",",");
