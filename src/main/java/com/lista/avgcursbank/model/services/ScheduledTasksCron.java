@@ -6,7 +6,6 @@ import com.lista.avgcursbank.model.Trades;
 import com.lista.avgcursbank.repository.AO_tradeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -33,12 +32,12 @@ public class ScheduledTasksCron {
 
     private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
     private final LookUpBankCurs lookUpBankCurs;
-    @Autowired
     private AO_tradeRepository tradeRepository;
 
-    public ScheduledTasksCron(SpringBootConfiguration config, LookUpBankCurs lookUpBankCurs) {
+    public ScheduledTasksCron(SpringBootConfiguration config, LookUpBankCurs lookUpBankCurs, AO_tradeRepository tradeRepository) {
         this.config = config;
         this.lookUpBankCurs = lookUpBankCurs;
+        this.tradeRepository = tradeRepository;
     }
 
     //@Scheduled(cron = "0 * * * * ?")

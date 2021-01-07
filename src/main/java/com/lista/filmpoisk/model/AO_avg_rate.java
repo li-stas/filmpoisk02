@@ -1,4 +1,4 @@
-package com.lista.avgcursbank.model;
+package com.lista.filmpoisk.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lista.avgcursbank.model.converters.LocalDateAttributeConverter;

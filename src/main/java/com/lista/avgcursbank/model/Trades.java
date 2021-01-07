@@ -24,6 +24,16 @@ public class Trades {
         trades = new ArrayList<>();
     }
 
+    public String[] cTrade2aTrade(String cTrade) {
+        cTrade = cTrade.replace("[","");
+        cTrade = cTrade.replace("]",",");
+        String[] aTTrade = cTrade.split("},");
+        for (int i = 0; i < aTTrade.length; i++) {
+            aTTrade[i] += "}";
+        }
+        return aTTrade;
+    }
+
     public List<AO_trade> getTrades() {
         return trades;
     }

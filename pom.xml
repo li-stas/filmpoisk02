@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lista</groupId>
-    <artifactId>filmpoisk02</artifactId>
+    <artifactId>avgcursbank</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>filmpoisk02</name>
-    <description>KinoPoisk project for Spring Boot</description>
+    <name>avgcursbank</name>
+    <description>avgcursbank project for Spring Boot</description>
     <packaging>jar</packaging> <!-- add -->
 
     <properties>
@@ -78,13 +78,26 @@
         </dependency>
 
         <!--        SSL-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
+        </dependency>
+        <!-- Swagger 2 Doc Dependency -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+       <!-- <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>-->
+        <!-- Swagger 2 UI -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
         </dependency>
 
     </dependencies>

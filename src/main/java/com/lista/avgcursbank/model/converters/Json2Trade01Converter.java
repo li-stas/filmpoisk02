@@ -28,18 +28,20 @@ public class Json2Trade01Converter implements Converter<String, Trades> {
     @Override
     public Trades convert(String cTrade) {
 
-        cTrade = cTrade.replace("[","");
+        Trades oTrades = new Trades(); // список курсов банка
+        String[] aTTrade = oTrades.cTrade2aTrade(cTrade);
+
+        /*cTrade = cTrade.replace("[","");
         cTrade = cTrade.replace("]",",");
         String[] aTTrade = cTrade.split("},");
         for (int i = 0; i < aTTrade.length; i++) {
             aTTrade[i] += "}";
-        }
+        }*/
 
-        Trades oTrades = new Trades(); // список курсов банка
         int j = 0; // для быстрого вход после поиска данных
 
-        for (int i = 0; i < aTTrade.length; i++) {
-            cTrade = aTTrade[i];
+        for (String s : aTTrade) {
+            cTrade = s;
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> mapTrade;

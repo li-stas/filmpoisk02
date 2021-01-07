@@ -7,9 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 
 @Configuration
@@ -21,6 +19,21 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addConverter(new Json2PageConverter());
         registry.addConverter(new Json2Trade03Converter());
 
+    }
+
+    /**
+     * swagger-ui Для HTTP-запроса сопоставление не найдено
+     * @param registry
+     */
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/configuration/ui", "/swagger-resources/configuration/ui");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     /**
@@ -47,34 +60,3 @@ public class WebConfig implements WebMvcConfigurer {
         mediaType("json", MediaType.APPLICATION_JSON);
     }
 }
-/*
- String config;
-        //config = "Using Path Parameters";
-        config = "Using Path Extension";
-
-        if (config.contains("Using Path Parameters")) {
-            log.info("config.contains(\"Using Path Parameters\")");
-            // установить расширение пути в false
-            configurer.favorPathExtension(false).
-                    // параметр запроса (по умолчанию "format") должен использоваться для определения запрошенного типа медиа
-                            favorParameter(true).
-                    // параметр favor установлен на «mediaType» вместо «format» по умолчанию
-                            parameterName("mediaType").
-                    // игнорируем заголовки принятия
-                            ignoreAcceptHeader(true).
-                    defaultContentType(MediaType.APPLICATION_JSON).
-                    mediaType("xml", MediaType.APPLICATION_XML).
-                    mediaType("json", MediaType.APPLICATION_JSON);
-        } else if (config.contains("Using Path Extension")) {
-            log.info("config.contains(\"Using Path Extension\")");
-            // установить расширение пути в true
-            configurer.favorPathExtension(true).
-                    // установить параметр предпочтения в false
-                            favorParameter(false).
-                    // игнорируем заголовки принятия
-                            ignoreAcceptHeader(true).
-                    defaultContentType(MediaType.APPLICATION_JSON).
-                    mediaType("xml", MediaType.APPLICATION_XML).
-                    mediaType("json", MediaType.APPLICATION_JSON);
-        }
- */

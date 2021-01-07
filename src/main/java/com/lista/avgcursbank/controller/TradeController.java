@@ -1,9 +1,7 @@
 package com.lista.avgcursbank.controller;
 
-import com.lista.avgcursbank.config.SpringBootConfiguration;
 import com.lista.avgcursbank.model.AO_trade;
 import com.lista.avgcursbank.model.Trades;
-import com.lista.avgcursbank.model.services.LookUpBankCurs;
 import com.lista.avgcursbank.model.services.ScheduledTasksCron;
 import com.lista.avgcursbank.model.services.TradeAvgAll;
 import com.lista.avgcursbank.model.services.TradeAvgPeriod;
@@ -11,9 +9,9 @@ import com.lista.avgcursbank.repository.AO_tradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,20 +19,19 @@ import java.util.Map;
 // /tacbank/v1/tradeadd
 
 @RestController
+@EnableSwagger2
 @RequestMapping("/tacbank/v1")
 public class TradeController {
-    private final SpringBootConfiguration config; // для введения ссылки напрямую в ваш класс:
-    private final LookUpBankCurs lookUpBankCurs;
+
     private final ScheduledTasksCron scheduledTasksCron;
     private final TradeAvgAll tradeAvgAll;
     private final TradeAvgPeriod tradeAvgPeriod;
     @Autowired
     private AO_tradeRepository tradeRepository;
 
-    public TradeController(SpringBootConfiguration config, LookUpBankCurs lookUpBankCurs
-            , ScheduledTasksCron scheduledTasksCron, TradeAvgAll tradeAvgAll, TradeAvgPeriod tradeAvgPeriod) {
-        this.config = config;
-        this.lookUpBankCurs = lookUpBankCurs;
+    public TradeController(ScheduledTasksCron scheduledTasksCron, TradeAvgAll tradeAvgAll
+            , TradeAvgPeriod tradeAvgPeriod) {
+
         this.scheduledTasksCron = scheduledTasksCron;
         this.tradeAvgAll = tradeAvgAll;
         this.tradeAvgPeriod = tradeAvgPeriod;
@@ -43,14 +40,15 @@ public class TradeController {
     //TradeAvgPeriod
     // GET method
     @GetMapping("/tradavgperiod")
-    public ResponseEntity<Trades> TradAvgPeriod() {
-        String cDt1 = "2021-01-06";
-        String cDt2 = "2021-01-06";
-        LocalDate dt1 = LocalDate.parse(cDt1);
-        LocalDate dt2 = LocalDate.parse(cDt2);
+    public ResponseEntity<Trades> TradAvgPeriod(
+            @RequestParam(value="date1", required = false, defaultValue = "2021-01-06") String cDt1,
+            @RequestParam(value="date2", required = false, defaultValue = "2021-01-06") String cDt2
+    ) {
+        /*cDt1 = "2021-01-06";
+        cDt2 = "2021-01-06";*/
 
         Trades findAvgPeriod = null;
-        findAvgPeriod = tradeAvgPeriod.eval();
+        findAvgPeriod = tradeAvgPeriod.eval(cDt1, cDt2);
 
         return ResponseEntity.ok().body(findAvgPeriod);
     }
@@ -62,13 +60,14 @@ public class TradeController {
         findAvgRate = tradeAvgAll.eval();
         return ResponseEntity.ok().body(findAvgRate);
     }
+
     // GET method to create a phone
     @GetMapping("/tradeadd")
     public ResponseEntity<Trades> addTrade() {
         Trades trades = scheduledTasksCron.scheduleTaskWithCronExpression();
         return ResponseEntity.ok().body(trades);
     }
-
+/*
     // GET method to fetch all phones
     @GetMapping("/tradelist")
     public List<AO_trade> getAllPhones() {
@@ -120,5 +119,5 @@ public class TradeController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
-    }
+    }*/
 }
