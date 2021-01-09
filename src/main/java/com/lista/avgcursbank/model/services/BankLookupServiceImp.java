@@ -17,6 +17,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -100,7 +101,7 @@ public class BankLookupServiceImp implements BankLookupService { //implements Si
 
     private Trades getPage(int nId_Bank, String cTrade) {
         Trades oTrade = new Trades(ERROR_STATUS + " " + cTrade, AUTH_FAILURE);
-        if (!(cTrade.contains("Error\":"))) {
+        if (!(cTrade == null || cTrade.contains("Error\":"))  ) {
             log.info("Call conversionService");
             switch (nId_Bank) {
                 case 1:
@@ -139,7 +140,13 @@ public class BankLookupServiceImp implements BankLookupService { //implements Si
             e.printStackTrace();
         }
 
-        String responseCode = restTemplate.getForObject(urlOverHttps, String.class);
+        String responseCode = null;
+        try {
+            responseCode = restTemplate.getForObject(urlOverHttps, String.class);
+        } catch (RestClientException e) {
+            log.error(e.getMessage() + " RestClientException ", e);
+            //e.printStackTrace();
+        }
         return responseCode;
     }
 
