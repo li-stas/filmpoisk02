@@ -1,7 +1,5 @@
 package com.lista.avgcursbank.model.converters;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lista.avgcursbank.model.AO_trade;
 import com.lista.avgcursbank.model.Trades;
 import org.slf4j.Logger;
@@ -19,6 +17,12 @@ import java.util.Map;
 @Component
 public class Json2Trade03Converter implements Converter<String, Trades> {
     private static final Logger log = LoggerFactory.getLogger(Json2Trade03Converter.class);
+    private final JsonStr2ObjMap jsonStr2ObjMap;
+
+    public Json2Trade03Converter(JsonStr2ObjMap jsonStr2ObjMap) {
+        this.jsonStr2ObjMap = jsonStr2ObjMap;
+    }
+
 
     @Override
     public Trades convert(String cTrade) {
@@ -36,13 +40,10 @@ public class Json2Trade03Converter implements Converter<String, Trades> {
         Trades oTrades = new Trades(); // список курсов банка*/
 
         for (String s : aTTrade) {
-            cTrade = s;
 
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, Object> mapTrade;
-            try {
-                mapTrade = mapper.readValue(cTrade, new TypeReference<Map<String, Object>>() {
-                });
+            Map<String, Object> mapTrade = jsonStr2ObjMap.getStringObjectMap(s);
+
+            if (mapTrade != null) {
 
                 AO_trade oTrade = new AO_trade();
 
@@ -77,10 +78,8 @@ public class Json2Trade03Converter implements Converter<String, Trades> {
                 if (oTrade.getId_currency() != 0) {
                     oTrades.addTrade(oTrade);
                 }
-
-            } catch (Exception e) {
-                log.error(e.getMessage(), e);
             }
+
         }
         return oTrades;
     }

@@ -19,6 +19,11 @@ import java.util.Map;
 @Component
 public class Json2Trade02Converter implements Converter<String, Trades> {
     private static final Logger log = LoggerFactory.getLogger(Json2Trade02Converter.class);
+    private final JsonStr2ObjMap jsonStr2ObjMap;
+
+    public Json2Trade02Converter(JsonStr2ObjMap jsonStr2ObjMap) {
+        this.jsonStr2ObjMap = jsonStr2ObjMap;
+    }
 
     @Override
     public Trades convert(String cTrade) {
@@ -37,14 +42,10 @@ public class Json2Trade02Converter implements Converter<String, Trades> {
         int j = 0; // для быстрого вход после поиска данных
 
         for (String s : aTTrade) {
-            cTrade = s;
 
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String, Object> mapTrade;
-            try {
-                mapTrade = mapper.readValue(cTrade, new TypeReference<Map<String, Object>>() {
-                });
+            Map<String, Object> mapTrade = jsonStr2ObjMap.getStringObjectMap(s);
 
+            if (mapTrade != null) {
                 AO_trade oTrade = new AO_trade();
 
                 oTrade.setDate_trade(LocalDate.now());
@@ -75,10 +76,9 @@ public class Json2Trade02Converter implements Converter<String, Trades> {
                 if (oTrade.getId_currency() != 0) {
                     oTrades.addTrade(oTrade);
                 }
-
-            } catch (Exception e) {
-                log.error(e.getMessage(), e);
             }
+
+
             if (j == 3) {
                 break;
             }

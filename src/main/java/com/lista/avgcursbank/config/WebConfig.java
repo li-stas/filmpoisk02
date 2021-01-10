@@ -1,6 +1,7 @@
 package com.lista.avgcursbank.config;
 
 import com.lista.avgcursbank.model.converters.Json2Trade03Converter;
+import com.lista.avgcursbank.model.converters.JsonStr2ObjMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,11 @@ import org.springframework.web.servlet.config.annotation.*;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
     private static final Logger log = LoggerFactory.getLogger(WebConfig.class);
+    private final JsonStr2ObjMap jsonStr2ObjMap;
+
+    public WebConfig(JsonStr2ObjMap jsonStr2ObjMap) {
+        this.jsonStr2ObjMap = jsonStr2ObjMap;
+    }
 
     /**
      * конвертор данных
@@ -20,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new Json2Trade03Converter());
+        registry.addConverter(new Json2Trade03Converter(jsonStr2ObjMap));
 
     }
 
